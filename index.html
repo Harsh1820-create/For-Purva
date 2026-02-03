@@ -3,136 +3,158 @@
 <head>
   <meta charset="UTF-8">
   <title>For Purva ❤️</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <style>
     body {
       background: linear-gradient(to bottom right, #ff9a9e, #fad0c4);
       font-family: 'Georgia', serif;
-      text-align: center;
       color: #fff;
       height: 100vh;
+      margin: 0;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin: 0;
+      text-align: center;
     }
+
     .card {
-      background: rgba(0, 0, 0, 0.25);
-      padding: 40px;
+      background: rgba(0,0,0,0.25);
+      padding: 40px 30px;
       border-radius: 25px;
       max-width: 520px;
+      width: 92%;
       box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-      animation: fadeIn 2s ease;
     }
-    h1 {
-      font-size: 34px;
-      margin-bottom: 15px;
+
+    #content {
+      font-size: 22px;
+      line-height: 1.7;
+      min-height: 120px;
+      animation: fadeIn 0.8s ease;
     }
-    p {
-      font-size: 20px;
-      line-height: 1.6;
-      margin: 15px 0;
+
+    img {
+      width: 100%;
+      border-radius: 18px;
+      margin-top: 18px;
+      animation: fadeIn 1s ease;
     }
-    h2 {
+
+    .hint {
       margin-top: 25px;
-      font-size: 28px;
+      font-size: 14px;
+      opacity: 0.8;
     }
+
+    .buttons {
+      margin-top: 25px;
+      display: none;
+    }
+
     button {
-      margin-top: 20px;
       background: #fff;
-      color: #ff6f91;
+      color: #ff5c8a;
       border: none;
-      padding: 14px 28px;
-      font-size: 18px;
+      padding: 12px 26px;
+      font-size: 17px;
       border-radius: 30px;
       cursor: pointer;
-      margin-left: 8px;
-      margin-right: 8px;
+      margin: 8px;
     }
-    button:hover {
-      transform: scale(1.05);
-    }
-    #mainContent, #finalMessage {
+
+    #playfulMsg {
+      margin-top: 20px;
+      font-size: 17px;
+      color: #ffe6ec;
       display: none;
-      animation: fadeIn 2s ease;
+      animation: fadeIn 0.6s ease;
     }
+
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(15px); }
+      from { opacity: 0; transform: translateY(10px); }
       to { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
 <body>
 
-  <div class="card">
+<div class="card" onclick="nextStep()">
+  <div id="content">💌 Harsh sent you something…</div>
+  <div id="image"></div>
 
-    <!-- Opening -->
-    <div id="opening">
-      <h1>💌</h1>
-      <p>Harsh sent you something…</p>
-    </div>
-
-    <!-- Main Content -->
-    <div id="mainContent">
-      <h1>Purva ❤️</h1>
-
-      <p>
-        In this loud world,<br>
-        you are my calm.<br>
-        In every uncertain moment,<br>
-        you are my home.
-      </p>
-
-      <p>
-        Loving you feels natural,<br>
-        like breathing without effort.
-      </p>
-
-      <h2>Will you be my Valentine? 💞</h2>
-
-      <button onclick="yes()">Yes, always 💖</button>
-      <button onclick="no()">No 🙈</button>
-    </div>
-
-    <!-- Final Message -->
-    <div id="finalMessage">
-      <p>
-        Thank you for choosing me, Purva.<br>
-        I promise to stand by you —<br>
-        on easy days and hard ones,<br>
-        today and every tomorrow.
-      </p>
-      <p>
-        With all my love,<br>
-        <strong>Harsh ❤️</strong>
-      </p>
-    </div>
-
+  <div class="buttons" id="buttons">
+    <button onclick="yes(event)">Yes ❤️</button>
+    <button onclick="no(event)">No 🙈</button>
   </div>
 
-  <script>
-    setTimeout(() => {
-      document.getElementById("opening").style.display = "none";
-      document.getElementById("mainContent").style.display = "block";
-    }, 3000);
+  <div id="playfulMsg"></div>
 
-    function yes() {
-      document.getElementById("mainContent").style.display = "none";
-      document.getElementById("finalMessage").style.display = "block";
-    }
+  <div class="hint">(tap anywhere)</div>
+</div>
 
-    function no() {
-  const messages = [
-    "❌ Error: This option is unavailable.\n\nBecause my heart already chose you, Purva ❤️",
-    "Nice try, Purva 😄\n\nBut we both know the answer 💕",
-    "❌ Error 143\n\nI love you too much to accept this answer ❤️",
-    "System message:\n\nYou are already my Valentine 💖",
-    "Oops 😌\n\nThis button doesn’t work when love is involved ❤️"
+<script>
+  const steps = [
+    { text: "Purva ❤️" },
+    { text: "In a world that never slows down," },
+    { text: "you became my pause." },
+    { image: "photo1.jpg" },
+    { text: "When life feels heavy," },
+    { text: "your presence makes it lighter." },
+    { image: "photo2.jpg" },
+    { text: "Loving you doesn’t feel like effort." },
+    { text: "It feels like home." },
+    { image: "photo3.jpg" },
+    { text: "So today, with a full heart…" },
+    { text: "Will you be my Valentine? 💞", buttons: true }
   ];
 
-  const randomMessage = messages[Math.floor(Math.random() * messages.length)];
-  alert(randomMessage);
-}
-  </script>
+  let index = 0;
+  const content = document.getElementById("content");
+  const imageBox = document.getElementById("image");
+  const buttons = document.getElementById("buttons");
+  const playfulMsg = document.getElementById("playfulMsg");
+
+  function nextStep() {
+    if (index >= steps.length) return;
+
+    content.style.animation = "none";
+    void content.offsetWidth;
+    content.style.animation = "fadeIn 0.8s ease";
+
+    imageBox.innerHTML = "";
+    playfulMsg.style.display = "none";
+
+    const step = steps[index];
+
+    if (step.text) content.innerText = step.text;
+    if (step.image) imageBox.innerHTML = `<img src="${step.image}">`;
+    if (step.buttons) buttons.style.display = "block";
+
+    index++;
+  }
+
+  function yes(e) {
+    e.stopPropagation();
+    content.innerText = 
+      "Thank you for choosing me, Purva.\n\nI promise to stand by you — on easy days and hard ones.\n\nWith all my love,\nHarsh ❤️";
+    imageBox.innerHTML = "";
+    buttons.style.display = "none";
+  }
+
+  function no(e) {
+    e.stopPropagation();
+    const messages = [
+      "Hmm… this option seems unavailable 😌",
+      "Nice try 😄 but my heart already knows",
+      "System message: Purva is already selected ❤️",
+      "No worries… take another look 💕",
+      "That button is just for decoration 🙈"
+    ];
+    playfulMsg.innerText = messages[Math.floor(Math.random() * messages.length)];
+    playfulMsg.style.display = "block";
+  }
+</script>
 
 </body>
 </html>
