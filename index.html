@@ -37,29 +37,20 @@
       font-size: 28px;
     }
     button {
-      margin-top: 25px;
+      margin-top: 20px;
       background: #fff;
       color: #ff6f91;
       border: none;
-      padding: 14px 32px;
+      padding: 14px 28px;
       font-size: 18px;
       border-radius: 30px;
       cursor: pointer;
+      margin-left: 8px;
+      margin-right: 8px;
     }
     button:hover {
       transform: scale(1.05);
     }
-    .photos img {
-      width: 100%;
-      border-radius: 18px;
-      margin-top: 15px;
-      opacity: 0;
-      animation: fadeIn 2s ease forwards;
-    }
-    .photos img:nth-child(1) { animation-delay: 1s; }
-    .photos img:nth-child(2) { animation-delay: 2s; }
-    .photos img:nth-child(3) { animation-delay: 3s; }
-
     #mainContent, #finalMessage {
       display: none;
       animation: fadeIn 2s ease;
@@ -71,11 +62,6 @@
   </style>
 </head>
 <body>
-
-  <!-- Background Music -->
-  <audio autoplay loop>
-    <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3" type="audio/mpeg">
-  </audio>
 
   <div class="card">
 
@@ -96,13 +82,6 @@
         you are my home.
       </p>
 
-      <!-- Photos -->
-      <div class="photos">
-        <img src="photo1.jpg" alt="Us ❤️">
-        <img src="photo2.jpg" alt="Purva 💕">
-        <img src="photo3.jpg" alt="Memories ✨">
-      </div>
-
       <p>
         Loving you feels natural,<br>
         like breathing without effort.
@@ -111,6 +90,7 @@
       <h2>Will you be my Valentine? 💞</h2>
 
       <button onclick="yes()">Yes, always 💖</button>
+      <button onclick="no()">No 🙈</button>
     </div>
 
     <!-- Final Message -->
@@ -138,6 +118,10 @@
     function yes() {
       document.getElementById("mainContent").style.display = "none";
       document.getElementById("finalMessage").style.display = "block";
+    }
+
+    function no() {
+      alert("❌ Error 404: Option not found 😄❤️\n\nPlease try again.");
     }
   </script>
 
