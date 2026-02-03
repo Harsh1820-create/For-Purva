@@ -121,8 +121,17 @@
     }
 
     function no() {
-      alert("❌ Error 404: Option not found 😄❤️\n\nPlease try again.");
-    }
+  const messages = [
+    "❌ Error: This option is unavailable.\n\nBecause my heart already chose you, Purva ❤️",
+    "Nice try, Purva 😄\n\nBut we both know the answer 💕",
+    "❌ Error 143\n\nI love you too much to accept this answer ❤️",
+    "System message:\n\nYou are already my Valentine 💖",
+    "Oops 😌\n\nThis button doesn’t work when love is involved ❤️"
+  ];
+
+  const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+  alert(randomMessage);
+}
   </script>
 
 </body>
