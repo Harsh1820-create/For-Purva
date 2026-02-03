@@ -5,10 +5,15 @@
   <title>For Purva ❤️</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <!-- Handwritten font -->
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;600&display=swap" rel="stylesheet">
+
   <style>
     body {
-      background: linear-gradient(to bottom right, #ff9a9e, #fad0c4);
-      font-family: 'Georgia', serif;
+      background:
+        radial-gradient(circle at top, rgba(255,182,193,0.35), transparent 60%),
+        linear-gradient(to bottom right, #7b2c3f, #b23a48, #ff758f);
+      font-family: 'Dancing Script', 'Georgia', serif;
       color: #fff;
       height: 100vh;
       margin: 0;
@@ -19,32 +24,47 @@
     }
 
     .card {
-      background: rgba(0,0,0,0.25);
+      background: rgba(0,0,0,0.28);
       padding: 40px 30px;
       border-radius: 25px;
       max-width: 520px;
       width: 92%;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+      box-shadow:
+        0 20px 40px rgba(0,0,0,0.35),
+        0 0 45px rgba(255, 120, 150, 0.35);
+      backdrop-filter: blur(8px);
     }
 
     #content {
       font-size: 22px;
       line-height: 1.7;
       min-height: 120px;
-      animation: fadeIn 0.8s ease;
+      letter-spacing: 0.5px;
+    }
+
+    #content::after {
+      content: " |";
+      animation: blink 1s infinite;
+    }
+
+    @keyframes blink {
+      0%,50% {opacity:1;}
+      51%,100% {opacity:0;}
     }
 
     img {
       width: 100%;
       border-radius: 18px;
       margin-top: 18px;
-      animation: fadeIn 1s ease;
+      opacity: 0;
+      animation: photoFade 4s ease forwards;
     }
 
-    .hint {
-      margin-top: 25px;
-      font-size: 14px;
-      opacity: 0.8;
+    @keyframes photoFade {
+      0% { opacity:0; }
+      20% { opacity:1; }
+      80% { opacity:1; }
+      100% { opacity:0; }
     }
 
     .buttons {
@@ -68,93 +88,202 @@
       font-size: 17px;
       color: #ffe6ec;
       display: none;
-      animation: fadeIn 0.6s ease;
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
+    #keepsake button {
+      font-size: 18px;
+      padding: 12px 28px;
+    }
+
+    #signature {
+      display: none;
+      margin-top: 25px;
+      font-size: 24px;
+      color: #ffd1dc;
+      opacity: 0;
+      transition: opacity 2s;
+    }
+
+    .heart {
+      position: fixed;
+      font-size: 22px;
+      animation: floatUp 2s ease forwards;
+      pointer-events: none;
+    }
+
+    @keyframes floatUp {
+      from { opacity: 1; transform: translateY(0) scale(1); }
+      to { opacity: 0; transform: translateY(-90px) scale(1.4); }
     }
   </style>
 </head>
+
 <body>
 
-<div class="card" onclick="nextStep()">
-  <div id="content">💌 Harsh sent you something…</div>
-  <div id="image"></div>
+  <!-- Music -->
+  <audio id="bgMusic" loop>
+    <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3" type="audio/mpeg">
+  </audio>
 
-  <div class="buttons" id="buttons">
-    <button onclick="yes(event)">Yes ❤️</button>
-    <button onclick="no(event)">No 🙈</button>
+  <div class="card" onclick="nextStep()">
+    <div id="content">💌 Harsh sent you something…</div>
+    <div id="image"></div>
+
+    <div class="buttons" id="buttons">
+      <button onclick="yes(event)">Yes ❤️</button>
+      <button onclick="no(event)">No 🙈</button>
+    </div>
+
+    <div id="playfulMsg"></div>
+
+    <div id="keepsake" style="display:none; margin-top:20px;">
+      <button onclick="replay()">Replay this moment 💌</button>
+    </div>
+
+    <div id="signature">— From Harsh ❤️</div>
+
+    <div class="hint">(tap anywhere)</div>
   </div>
 
-  <div id="playfulMsg"></div>
+  <!-- Floating hearts -->
+  <script>
+    for(let i=0;i<12;i++){
+      const heartEl=document.createElement("div");
+      heartEl.className="heart";
+      heartEl.innerText="💖";
+      heartEl.style.left=Math.random()*100+"vw";
+      heartEl.style.bottom="20px";
+      document.body.appendChild(heartEl);
+      setTimeout(()=>heartEl.remove(),2000);
+    }
+  </script>
 
-  <div class="hint">(tap anywhere)</div>
-</div>
-
-<script>
-  const steps = [
-    { text: "Purva ❤️" },
-    { text: "In a world that never slows down," },
-    { text: "you became my pause." },
-    { image: "DB290343.jpeg" },
-    { text: "When life feels heavy," },
-    { text: "your presence makes it lighter." },
-    { image: "photo2.jpg" },
-    { text: "Loving you doesn’t feel like effort." },
-    { text: "It feels like home." },
-    { image: "photo3.jpg" },
-    { text: "So today, with a full heart…" },
-    { text: "Will you be my Valentine? 💞", buttons: true }
-  ];
-
-  let index = 0;
-  const content = document.getElementById("content");
-  const imageBox = document.getElementById("image");
-  const buttons = document.getElementById("buttons");
-  const playfulMsg = document.getElementById("playfulMsg");
-
-  function nextStep() {
-    if (index >= steps.length) return;
-
-    content.style.animation = "none";
-    void content.offsetWidth;
-    content.style.animation = "fadeIn 0.8s ease";
-
-    imageBox.innerHTML = "";
-    playfulMsg.style.display = "none";
-
-    const step = steps[index];
-
-    if (step.text) content.innerText = step.text;
-    if (step.image) imageBox.innerHTML = `<img src="${step.image}">`;
-    if (step.buttons) buttons.style.display = "block";
-
-    index++;
-  }
-
-  function yes(e) {
-    e.stopPropagation();
-    content.innerText = 
-      "Thank you for choosing me, Purva.\n\nI promise to stand by you — on easy days and hard ones.\n\nWith all my love,\nHarsh ❤️";
-    imageBox.innerHTML = "";
-    buttons.style.display = "none";
-  }
-
-  function no(e) {
-    e.stopPropagation();
-    const messages = [
-      "Hmm… this option seems unavailable 😌",
-      "Nice try 😄 but my heart already knows",
-      "System message: Purva is already selected ❤️",
-      "No worries… take another look 💕",
-      "That button is just for decoration 🙈"
+  <script>
+    // Steps of the letter
+    const steps = [
+      { text: "💌 Harsh sent you something…" },
+      { text: "Purva ❤️" },
+      { text: "In a world that never slows down," },
+      { text: "you became my pause." },
+      { image: "photo1.jpg" },
+      { text: "When life feels heavy," },
+      { text: "your presence makes it lighter." },
+      { image: "photo2.jpg" },
+      { text: "Loving you doesn’t feel like effort." },
+      { text: "It feels like home." },
+      { image: "photo3.jpg" },
+      { text: "So today, with a full heart…" },
+      { text: "Will you be my Valentine? 💞", buttons:true }
     ];
-    playfulMsg.innerText = messages[Math.floor(Math.random() * messages.length)];
-    playfulMsg.style.display = "block";
-  }
-</script>
+
+    let stepIndex=0;
+    let isTyping=false;
+
+    const content=document.getElementById("content");
+    const imageBox=document.getElementById("image");
+    const buttons=document.getElementById("buttons");
+    const playfulMsg=document.getElementById("playfulMsg");
+
+    const music=document.getElementById("bgMusic");
+
+    function typeText(text, callback){
+      isTyping=true;
+      content.innerText="";
+      const words=text.split(" ");
+      let i=0;
+      const interval=setInterval(()=>{
+        content.innerText+=words[i]+" ";
+        i++;
+        if(i>=words.length){
+          clearInterval(interval);
+          isTyping=false;
+          if(callback) callback();
+        }
+      },180);
+    }
+
+    function nextStep(){
+      if(isTyping || stepIndex>=steps.length) return;
+
+      if(music.paused) music.play();
+
+      imageBox.innerHTML="";
+      playfulMsg.style.display="none";
+
+      const step=steps[stepIndex];
+
+      if(step.text) typeText(step.text);
+      if(step.image) imageBox.innerHTML=`<img src="${step.image}">`;
+      if(step.buttons) buttons.style.display="block";
+
+      stepIndex++;
+    }
+
+    function yes(e){
+      e.stopPropagation();
+
+      // Heart burst
+      for(let i=0;i<14;i++){
+        const heart=document.createElement("div");
+        heart.className="heart";
+        heart.innerText="💖";
+        heart.style.left=Math.random()*100+"vw";
+        heart.style.bottom="20px";
+        document.body.appendChild(heart);
+        setTimeout(()=>heart.remove(),2000);
+      }
+
+      buttons.style.display="none";
+      imageBox.innerHTML="";
+      localStorage.setItem("valentineAccepted","yes");
+      document.getElementById("keepsake").style.display="block";
+
+      typeText(
+        "Thank you for choosing me, Purva. I promise to stand by you on easy days and hard ones. Today and every tomorrow. With all my love, Harsh ❤️"
+      );
+
+      // Signature fade-in
+      setTimeout(()=>{
+        const sig=document.getElementById("signature");
+        sig.style.display="block";
+        setTimeout(()=>sig.style.opacity=1,100);
+      },1800);
+    }
+
+    function no(e){
+      e.stopPropagation();
+      const messages=[
+        "Hmm… this option seems unavailable 😌",
+        "Nice try 😄 but my heart already knows",
+        "System message: Purva is already selected ❤️",
+        "No worries… take another look 💕",
+        "That button is just for decoration 🙈"
+      ];
+      playfulMsg.innerText=messages[Math.floor(Math.random()*messages.length)];
+      playfulMsg.style.display="block";
+    }
+
+    function replay(){
+      stepIndex=0;
+      buttons.style.display="none";
+      document.getElementById("keepsake").style.display="none";
+      document.getElementById("signature").style.opacity=0;
+      document.getElementById("signature").style.display="none";
+      nextStep();
+    }
+
+    // Keepsake on revisit
+    window.onload=()=>{
+      if(localStorage.getItem("valentineAccepted")==="yes"){
+        stepIndex=steps.length-1;
+        buttons.style.display="none";
+        document.getElementById("keepsake").style.display="block";
+        typeText("💌 This moment was saved. Tap replay whenever you want, Purva ❤️");
+        document.getElementById("signature").style.display="block";
+        document.getElementById("signature").style.opacity=1;
+      }
+    }
+  </script>
 
 </body>
 </html>
