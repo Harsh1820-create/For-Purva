@@ -2,13 +2,12 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>For Purva ❤️</title>
+<title>For Sharvika ❤️</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Dancing+Script:wght@500;700&display=swap" rel="stylesheet">
 
 <style>
-/* Global styles */
 html, body {
   margin: 0;
   padding: 0;
@@ -23,36 +22,33 @@ html, body {
     url('my_bg.JPEG') center/cover no-repeat;
 }
 
-/* Card styling with pulsing glow */
 .card {
   background: rgba(255,255,255,0.95);
-  width: 90%;
-  max-width: 500px;
-  padding: 22px 18px;
+  width: 80%;
+  max-width: 400px;
+  padding: 18px 15px;
   border-radius: 18px;
   box-shadow: 0 0 40px rgba(255,105,150,0.3), 0 15px 30px rgba(0,0,0,0.2);
   text-align: center;
   overflow-wrap: break-word;
   position: relative;
   animation: pulseGlow 3s ease-in-out infinite;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-/* Pulse glow animation */
 @keyframes pulseGlow {
-  0%, 100% {
-    box-shadow: 0 0 40px rgba(255,105,150,0.3), 0 15px 30px rgba(0,0,0,0.2);
-  }
-  50% {
-    box-shadow: 0 0 60px rgba(255,105,150,0.5), 0 15px 30px rgba(0,0,0,0.25);
-  }
+  0%, 100% { box-shadow: 0 0 40px rgba(255,105,150,0.3), 0 15px 30px rgba(0,0,0,0.2); }
+  50% { box-shadow: 0 0 60px rgba(255,105,150,0.5), 0 15px 30px rgba(0,0,0,0.25); }
 }
 
-/* Story text */
 #dialogue {
-  font-size: clamp(14px, 2vw, 18px);
+  font-size: clamp(14px, 1.9vw, 17px);
   line-height: 1.6;
   color: #3b1f2b;
-  min-height: 160px;
+  min-height: 140px;
   opacity: 0;
   transition: opacity 1s;
   white-space: pre-wrap;
@@ -60,46 +56,44 @@ html, body {
   font-style: italic;
 }
 
-/* Glow for final line */
 .glow {
   color: #ff2f6d;
   font-weight: 700;
-  font-size: clamp(18px, 2.5vw, 22px);
+  font-size: clamp(17px, 2.2vw, 20px);
 }
 
-/* Buttons */
 #buttons {
   display: none;
-  margin-top: 18px;
+  margin-top: 15px;
+  text-align: center;
 }
 
 button {
-  padding: 8px 20px;
+  padding: 7px 18px;
   border: none;
   border-radius: 25px;
-  font-size: clamp(13px, 1.8vw, 16px);
+  font-size: clamp(12px, 1.7vw, 15px);
   cursor: pointer;
-  margin: 6px;
+  margin: 5px;
   transition: all 0.3s ease;
 }
 
 #yes { background: #ff5c8a; color: white; }
 #no { background: #ddd; position: relative; }
 
-/* Signature */
 #signature {
-  margin-top: 15px;
+  margin-top: 12px;
   font-family: 'Dancing Script', cursive;
-  font-size: clamp(18px, 2.2vw, 22px);
+  font-size: clamp(17px, 2vw, 20px);
   opacity: 0;
   transition: 2s;
+  text-align: center;
 }
 
-/* Forever message */
 #forever {
   opacity: 0;
-  margin-top: 15px;
-  font-size: clamp(20px, 2.5vw, 24px);
+  margin-top: 12px;
+  font-size: clamp(18px, 2.2vw, 22px);
   font-weight: 700;
   line-height: 1.4;
   color: #ff2f6d;
@@ -107,20 +101,18 @@ button {
   transition: 2s;
 }
 
-/* Responsive adjustments */
 @media(max-width:480px){
-  .card { padding: 18px 12px; }
-  #dialogue { font-size: 15px; min-height: 140px; }
-  #forever { font-size: 18px; }
-  #signature { font-size: 18px; }
-  button { font-size: 14px; padding: 7px 16px; }
+  .card { padding: 15px 10px; width: 90%; }
+  #dialogue { font-size: 14px; min-height: 120px; }
+  #forever { font-size: 16px; }
+  #signature { font-size: 16px; }
+  button { font-size: 13px; padding: 6px 14px; }
 }
 </style>
 </head>
 
 <body>
 
-<!-- Background Music -->
 <audio id="bgMusic" autoplay loop>
   <source src="music.mp3" type="audio/mpeg">
 </audio>
@@ -129,33 +121,34 @@ button {
   <div id="dialogue"></div>
 
   <div id="buttons">
-    <button id="yes" onclick="yes()">Yes ❤️</button>
+    <button id="yes" onclick="yes()">Yes 🧡</button>
     <button id="no">No 🙈</button>
   </div>
 
-  <div id="signature">— Always yours, Harsh ❤️</div>
+  <div id="signature">— Harsh 🧡</div>
 
   <div id="forever">
     I am always yours<br>
-    Forever and ever and ever
+    Forever and ever and ever...
   </div>
 </div>
 
 <script>
-// Story content
+// Story from Dad to daughter
 const story = [
-"Harsh first sent Purva a request on Shaadi.com, and she rejected it unknowingly. After two months, he sent her again, and this time she accepted unknowingly. Thinking she might not respond there, he sent her a request on Instagram, which she accepted.",
-"Harsh first said, ‘Hey.’ Purva replied, ‘Hey, do we know each other?’ It was 21st May 2025. She unfollowed him back. Soon, conversations began on Instagram and WhatsApp.",
-"Harsh wrote in his notes that they would get married even before they were officially in a relationship. He was that sure.",
-"At first, conversations were not smooth. Distance made time scarce. Then Purva went to Udaipur, and communication stopped completely.",
-"One day after the trip, at exactly 12:12 PM, Purva messaged that they should not take it further. His heart broke. She liked him, but her internal battles were stronger.",
-"Harsh thought it was the end. Then, after a week, she messaged again. He was elated. They decided to go with the flow.",
-"They laughed, fought, cried, and had difficult conversations. Somewhere in between, love quietly found its place.",
-"Months passed. Families met. Everything became official.",
-"Their first physical meeting after long distance was magical — hugs, kisses, and the comfort of finally being together.",
-"They traveled, got engaged, married, and went to Goa together — walking along beaches, sharing silences, creating memories. It was the best 1.5 months of Harsh’s life.",
-"So Purva… after everything…",
-"Will you be my Valentine?"
+"Hey Sharvika, this is Dad. I want to tell you our story…",
+"I first sent your mom a request on Shaadi.com, and she didn’t accept at first. After two months, I tried again, and she accepted. Then I reached out on Instagram, and she accepted there too!",
+"I said 'Hey', and she replied, 'Hey, do we know each other?' That was 21st May 2025. She even unfollowed me back briefly, but soon we started chatting on Instagram and WhatsApp.",
+"I wrote in my notes that we would get married, even before our relationship officially began. I was that sure!",
+"At first, our conversations were short and tricky, because of the distance. Then your mom went to Udaipur, and our chats stopped completely.",
+"One day after her trip, she messaged me saying we shouldn’t continue. My heart broke. She liked me, but she was fighting her own battles.",
+"After a week, she messaged again! I was elated. We decided to go with the flow and see where it would lead.",
+"We laughed, argued, cried, and shared serious conversations. And slowly, love grew quietly between us.",
+"Months passed, our families met, and everything became official.",
+"The first time I met your mom in person after long distance was magical — hugs, kisses, and so much happiness.",
+"We traveled together, got engaged, married, and went to Goa — walking along beaches, sharing silences, and creating memories. Those 1.5 months were some of the happiest of my life!",
+"So Purvaa....",
+"Will you be my forever Valentine ?"
 ];
 
 let i = 0;
@@ -167,10 +160,8 @@ const music = document.getElementById("bgMusic");
 const yesBtn = document.getElementById("yes");
 const noBtn = document.getElementById("no");
 
-// Start music on mobile
 document.addEventListener("click",()=>{ if(music.paused) music.play(); });
 
-// Slow typewriter animation
 function typeLine(line, callback){
   let idx = 0;
   box.innerText = '';
@@ -183,10 +174,9 @@ function typeLine(line, callback){
       clearInterval(interval);
       setTimeout(callback, 1200);
     }
-  }, 80); // slow typing
+  }, 80);
 }
 
-// Show story sequentially
 function showStory(){
   if(i >= story.length) return;
   if(i === story.length - 1){
@@ -203,26 +193,21 @@ function showStory(){
 }
 showStory();
 
-// Yes button click
 function yes(){
   buttons.style.display="none";
   sign.style.opacity = 1;
   setTimeout(()=>{ forever.style.opacity = 1; }, 1200);
 }
 
-// No button playful hover
 noBtn.addEventListener("mouseenter", ()=>{
-  // Move No button randomly
-  const x = Math.random()*150 - 75;
-  const y = Math.random()*100 - 50;
+  const x = Math.random()*120 - 60;
+  const y = Math.random()*80 - 40;
   noBtn.style.transform = `translate(${x}px, ${y}px)`;
 
-  // Make Yes button grow and glow
   yesBtn.style.transform = "scale(1.6)";
   yesBtn.style.boxShadow = "0 0 20px #ff5c8a, 0 0 40px #ff9ab3";
   yesBtn.style.transition = "transform 0.3s ease, box-shadow 0.3s ease";
 
-  // Return to normal after 400ms
   setTimeout(()=>{
     yesBtn.style.transform = "scale(1)";
     yesBtn.style.boxShadow = "";
