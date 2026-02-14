@@ -2,181 +2,147 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Our Story – Animated Conversation</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Story – Cinematic</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 body, html {
   margin:0; padding:0;
   width:100%; height:100%;
-  overflow:hidden;
-  font-family:'Inter', sans-serif;
+  font-family:'Inter',sans-serif;
   background: url('background.jpg') center/cover no-repeat;
-  position:relative;
   display:flex; justify-content:center; align-items:center;
+  overflow:hidden;
+  position:relative;
   color:white;
 }
 
 body::before {
-  content:"";
-  position:absolute; top:0; left:0;
-  width:100%; height:100%;
-  background: rgba(0,0,0,0.25);
-  z-index:0;
+  content:""; position:absolute; top:0; left:0; width:100%; height:100%;
+  background: rgba(0,0,0,0.3); z-index:0;
 }
 
 body::after {
-  content:"";
-  position:absolute; top:0; left:0;
-  width:100%; height:100%;
+  content:""; position:absolute; top:0; left:0; width:100%; height:100%;
+  background: url('grain.png') repeat; opacity:0.08; z-index:1;
   pointer-events:none;
-  background: url('grain.png') repeat;
-  opacity:0.08;
-  z-index:1;
   animation:grainAnim 0.5s infinite;
 }
 @keyframes grainAnim {0%{background-position:0 0;}50%{background-position:100px 100px;}100%{background-position:0 0;}}
 
 .card {
-  position:relative; width:100%; max-width:1100px; height:100%;
-  display:flex; flex-direction:column; justify-content:flex-end; align-items:center;
-  padding:2vh 5vw; box-sizing:border-box; z-index:2;
+  position:relative; width:90%; max-width:800px; text-align:center; z-index:2;
 }
 
-#chapter { font-size:clamp(18px,3vw,26px); font-weight:500; position:absolute; top:2vh; left:50%; transform:translateX(-50%); text-align:center; opacity:0; transition: opacity 0.8s ease, transform 0.8s ease; }
-#date { font-size:clamp(22px,4vw,32px); font-weight:500; position:absolute; top:7vh; left:50%; transform:translateX(-50%); text-align:center; opacity:0; transition: opacity 0.8s ease, transform 0.8s ease; }
+#chapter {
+  font-size:clamp(28px,6vw,48px); font-weight:600;
+  opacity:0; transform: scale(0.8); transition: all 0.8s ease;
+}
 
-#conversation { width:100%; display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; margin-bottom:2vh; }
-.avatar { display:flex; flex-direction:column; align-items:center; width:20vw; max-width:150px; min-width:80px; }
-.avatar img { width:100%; border-radius:50%; border:2px solid white; animation: bob 2s ease-in-out infinite, blink 5s ease-in-out infinite; }
-.avatar.boy img { animation-name:bobBoy, blink; }
-.avatar.girl img { animation-name:bobGirl, blink; }
+#date {
+  font-size:clamp(20px,4vw,32px); font-weight:500; margin-top:1vh;
+  opacity:0; transform: translateY(20px); transition: all 0.6s ease;
+}
 
-@keyframes bobBoy {0%,100%{transform:translateY(0);}50%{transform:translateY(-3px);}}
-@keyframes bobGirl {0%,100%{transform:translateY(0);}50%{transform:translateY(-3px);}}
-@keyframes blink {0%,20%,60%,100%{transform:scaleY(1);}10%,70%{transform:scaleY(0.1);}}
+#content {
+  font-size:clamp(18px,3.5vw,26px); background: rgba(255,255,255,0.85); color:#000;
+  border-radius:15px; padding:12px 18px; margin-top:3vh; max-width:90%;
+  opacity:0; transform: translateY(20px); transition: all 0.6s ease;
+}
 
-.speech { background: rgba(255,255,255,0.85); color:#000; border-radius:15px; padding:8px 12px; margin-top:5px; text-align:center; opacity:0; transform: translateY(10px); transition: opacity 0.8s ease, transform 0.6s ease; word-wrap: break-word; }
-.speech.show { opacity:1; transform:translateY(0); }
+#media img {
+  width:100%; max-width:90%; max-height:40vh; object-fit:contain; border-radius:15px;
+  margin-top:15px; opacity:0; transform: scale(0.95); transition: all 1s ease;
+}
 
-#media img { width:100%; max-width:90%; max-height:40vh; object-fit:contain; border-radius:15px; margin-top:15px; opacity:0; animation:photoFade 5s ease forwards; }
-@keyframes photoFade {0%{opacity:0;}20%{opacity:1;}80%{opacity:1;}100%{opacity:0;}}
-
-#buttons { display:none; margin-top:15px; text-align:center; }
+#buttons { display:none; margin-top:20px; }
 button { padding:12px 28px; border-radius:30px; border:none; font-size:clamp(16px,2vw,20px); margin:8px; cursor:pointer; }
 #yes { background:white; color:#ff5c8a; }
 #no { background:rgba(255,255,255,0.2); color:white; }
 
-#signature { font-size:clamp(20px,2.5vw,26px); text-align:center; margin-top:15px; opacity:0; }
-
-.zoom { animation:slowZoom 8s ease forwards; }
-@keyframes slowZoom {from{transform:scale(1);}to{transform:scale(1.08);}}
+#signature { font-size:clamp(20px,2.5vw,26px); margin-top:15px; opacity:0; transition: opacity 2s; }
 </style>
 </head>
-
 <body>
 <div class="card">
   <div id="chapter"></div>
   <div id="date"></div>
   <div id="media"></div>
-
-  <div id="conversation">
-    <div class="avatar boy">
-      <img src="boy.png" />
-      <div class="speech" id="speech-boy"></div>
-    </div>
-    <div class="avatar girl">
-      <img src="girl.png" />
-      <div class="speech" id="speech-girl"></div>
-    </div>
-  </div>
-
+  <div id="content"></div>
   <div id="buttons">
-    <button id="yes" onclick="yes(event)">Yes ❤️</button>
-    <button id="no" onclick="no(event)">No 🙈</button>
+    <button id="yes" onclick="yes()">Yes ❤️</button>
+    <button id="no" onclick="no()">No 🙈</button>
   </div>
-
   <div id="signature">— From Harsh ❤️</div>
 </div>
 
 <audio id="music"></audio>
 
 <script>
-const conversationScenes = [
-  { chapter:"Chapter 1 – Beginning", date:"21st May 2025", speaker:"boy", text:"Hey!" },
-  { speaker:"girl", text:"Hey, do we know each other?" },
-  { speaker:"boy", text:"Yes… I sent a request on Shaadi.com ❤️" },
-  { speaker:"girl", text:"Oh… I didn’t notice before!" },
-  { chapter:"Chapter 2 – Distance", date:"24th May 2025", speaker:"boy", text:"We started chatting on Insta and WhatsApp." },
-  { speaker:"girl", text:"It was confusing at first…" },
-  { speaker:"boy", text:"I knew somehow… we will be together." },
-  { chapter:"Chapter 3 – Heartbreak", date:"9th June 2025", speaker:"girl", text:"I think we shouldn’t continue…" },
-  { speaker:"boy", text:"…my heart broke 😢" },
-  { chapter:"Chapter 4 – Hope Returns", date:"15th June 2025", speaker:"girl", text:"Hey… maybe we can go with the flow?" },
-  { speaker:"boy", text:"Yes, let’s see where this goes ❤️" },
-  { chapter:"Chapter 5 – First Meeting", date:"2nd December 2025", speaker:"boy", text:"Finally meeting you in person!" , image:"photo2.jpg" },
-  { speaker:"girl", text:"I am so happy to see you 😍" },
-  { chapter:"Chapter 6 – Forever", date:"14th December 2025", speaker:"boy", text:"We got engaged, married, and celebrated together.", image:"photo3.jpg" },
-  { speaker:"girl", text:"The best 1.5 months of my life!" , image:"photo4.jpg" },
-  { final:true }
+// Story data
+const scenes=[
+  {chapter:"Chapter 1 – Beginning", date:"21st May 2025", content:"Hey! We started talking on Insta and WhatsApp."},
+  {chapter:"Chapter 2 – Distance", date:"24th May 2025", content:"It was confusing at first, but I knew we would be together."},
+  {chapter:"Chapter 3 – Heartbreak", date:"9th June 2025", content:"She said we shouldn't continue… my heart broke 😢"},
+  {chapter:"Chapter 4 – Hope Returns", date:"15th June 2025", content:"A week later, she reached out… we decided to go with the flow ❤️"},
+  {chapter:"Chapter 5 – First Meeting", date:"2nd December 2025", content:"Finally meeting in person! So happy 😍", image:"photo2.jpg"},
+  {chapter:"Chapter 6 – Forever", date:"14th December 2025", content:"We got engaged, married, and celebrated together.", image:"photo3.jpg"},
+  {final:true}
 ];
 
 let index=0;
 const chapterEl=document.getElementById("chapter");
 const dateEl=document.getElementById("date");
+const contentEl=document.getElementById("content");
+const mediaEl=document.getElementById("media");
+const buttons=document.getElementById("buttons");
+const signature=document.getElementById("signature");
 const music=document.getElementById("music");
-const textBoy=document.getElementById("speech-boy");
-const textGirl=document.getElementById("speech-girl");
-const media=document.getElementById("media");
 
-const tracks={ start:"music1.mp3", hope:"music2.mp3", forever:"music3.mp3" };
+// Music (optional)
+const tracks={start:"music1.mp3", hope:"music2.mp3", forever:"music3.mp3"};
 
 function play(src){ if(music.src.includes(src)) return; music.src=src; music.play(); }
 
-function nextConvo(){
-  if(index>=conversationScenes.length) return;
-  const s=conversationScenes[index];
+function nextScene(){
+  if(index>=scenes.length) return;
+  const s=scenes[index];
 
-  // Chapter & Date animation
-  if(s.chapter) { chapterEl.style.opacity=0; chapterEl.innerText=s.chapter; setTimeout(()=>{chapterEl.style.opacity=1;},100); }
-  if(s.date) { dateEl.style.opacity=0; dateEl.innerText=s.date; setTimeout(()=>{dateEl.style.opacity=1;},100); }
+  // Reset all
+  chapterEl.style.opacity=0; dateEl.style.opacity=0; contentEl.style.opacity=0; mediaEl.innerHTML="";
 
-  // Photo
-  if(s.image) media.innerHTML=`<img src="${s.image}">`;
+  setTimeout(()=>{
+    // Chapter appears
+    chapterEl.innerText=s.chapter;
+    chapterEl.style.opacity=1; chapterEl.style.transform="scale(1)";
+  },100);
 
-  // Speech bubble
-  if(s.speaker==="boy"){ textBoy.innerText=s.text; textBoy.classList.add("show"); textGirl.classList.remove("show"); }
-  else if(s.speaker==="girl"){ textGirl.innerText=s.text; textGirl.classList.add("show"); textBoy.classList.remove("show"); }
-
-  // Music
-  if(index===0) play(tracks.start);
-  if(index===7) music.pause();
-  if(index===9) play(tracks.hope);
-  if(index===12) play(tracks.forever);
-
-  // Final Valentine question
-  if(s.final){
-    music.pause();
-    setTimeout(()=>{
-      textBoy.classList.remove("show"); textGirl.classList.remove("show"); media.innerHTML=""; chapterEl.innerText=""; dateEl.innerText="";
-      const finalText=document.createElement("div"); finalText.style.fontSize="26px"; finalText.style.textAlign="center";
-      finalText.innerText="Will you be my Valentine… again?";
-      document.querySelector(".card").appendChild(finalText);
-      document.getElementById("buttons").style.display="block";
-    },1200);
-  }
+  // Date appears on next tap
+  chapterEl.addEventListener("click",function showDate(){
+    chapterEl.removeEventListener("click",showDate);
+    dateEl.innerText=s.date;
+    dateEl.style.opacity=1; dateEl.style.transform="translateY(0)";
+    // Content appears on next tap
+    dateEl.addEventListener("click",function showContent(){
+      dateEl.removeEventListener("click",showContent);
+      contentEl.innerText=s.content;
+      contentEl.style.opacity=1; contentEl.style.transform="translateY(0)";
+      // Show image if any
+      if(s.image) mediaEl.innerHTML=`<img src="${s.image}">`; 
+      if(s.final){
+        setTimeout(()=>{buttons.style.display="block";},600);
+      }
+    });
+  });
 
   index++;
 }
 
-// Tap to progress one at a time
-document.querySelector(".card").addEventListener("click", nextConvo);
+document.querySelector(".card").addEventListener("click", nextScene);
 
-function yes(e){ e.stopPropagation(); document.getElementById("buttons").style.display="none";
-  const signature=document.getElementById("signature"); signature.style.opacity=1;
-  signature.innerText="Thank you for choosing me — again. Always. — From Harsh ❤️";
-}
-function no(e){ e.stopPropagation(); alert("This option was never real ❤️"); }
+function yes(){ buttons.style.display="none"; signature.style.opacity=1; signature.innerText="Thank you for choosing me — again. Always. — From Harsh ❤️";}
+function no(){ alert("This option was never real ❤️"); }
+
 </script>
 </body>
 </html>
