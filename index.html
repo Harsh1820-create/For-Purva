@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Our Love Story – Cinematic Auto</title>
+<title>Our Love Story – Cinematic</title>
 <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
 <style>
 html, body { margin:0; padding:0; width:100%; height:100%; overflow:hidden; background:#000; font-family:'Dancing Script', cursive; color:white;}
@@ -20,6 +20,39 @@ button { padding:12px 28px; border-radius:30px; border:none; font-size:clamp(16p
 #signature { font-size:clamp(20px,2.5vw,26px); margin-top:15px; opacity:0; transform:scale(0.8); transition:all 2s ease; font-family:'Playfair Display', serif;}
 .heart { position:absolute; width:30px; height:30px; background:red; clip-path: polygon(50% 0%, 100% 35%, 80% 100%, 50% 80%, 20% 100%, 0 35%); animation:hearts 2s linear forwards;}
 @keyframes hearts { 0%{transform:translateY(0) scale(0.5); opacity:1;} 100%{transform:translateY(-300px) scale(1.2); opacity:0;} }
+.no-bubble {
+  position: absolute;
+  left: 50%;
+  bottom: 100px;
+  transform: translateX(-50%);
+  background: rgba(255, 192, 203, 0.9);
+  color: #800020;
+  padding: 12px 20px;
+  border-radius: 25px;
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(16px, 2vw, 20px);
+  opacity: 0;
+  pointer-events: none;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  animation: floatUp 2s ease forwards;
+}
+@keyframes floatUp {
+  0% { transform: translateX(-50%) translateY(0); opacity: 1; }
+  100% { transform: translateX(-50%) translateY(-150px); opacity: 0; }
+}
+.heart-bubble {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: red;
+  clip-path: polygon(50% 0%, 100% 35%, 80% 100%, 50% 80%, 20% 100%, 0 35%);
+  opacity: 0;
+  animation: floatHeart 2s ease forwards;
+}
+@keyframes floatHeart {
+  0% { transform:translateY(0) scale(0.5); opacity:1; }
+  100% { transform:translateY(-150px) scale(1.2); opacity:0; }
+}
 </style>
 </head>
 <body>
@@ -42,17 +75,17 @@ button { padding:12px 28px; border-radius:30px; border:none; font-size:clamp(16p
 
 <script>
 const scenes=[
-  {chapter:"Chapter 1 – First Contact", dialogue:"I first sent you a request on Shaadi.com, you rejected it unknowingly. Two months later I sent again, and this time you accepted unknowingly. I thought you won’t respond, so I sent a request on Instagram and you accepted.", bg:"bg1.jpg"},
-  {chapter:"Chapter 2 – First Conversation", dialogue:"I said Hey, and you responded Hey. Then you asked, ‘Do we know each other?’ Our conversation started here.", bg:"bg2.jpg"},
-  {chapter:"Chapter 3 – Confidence & Notes", dialogue:"Even before being in a relationship, I wrote in my notes that we will get married. I was that sure.", bg:"bg3.jpg"},
-  {chapter:"Chapter 4 – Long Distance & Trip", dialogue:"Our conversations were not smooth at first. We had little time to talk, and during your Udaipur trip, our messages stopped completely.", bg:"bg4.jpg"},
-  {chapter:"Chapter 5 – Heartbreak", dialogue:"One day after the trip, you messaged me at 12:12 PM that we should not continue. My heart broke. You liked me but were fighting your internal battles.", bg:"bg5.jpg"},
-  {chapter:"Chapter 6 – Reunion & Flow", dialogue:"A week later, you messaged me again. We laughed, cried, fought, and decided to go with the flow.", bg:"bg6.jpg"},
-  {chapter:"Chapter 7 – Falling in Love", dialogue:"Over months, we laughed, fought, cried, had serious conversations, and fell in love.", bg:"bg7.jpg"},
-  {chapter:"Chapter 8 – Families Meet", dialogue:"Our families met and it became official. We were finally a couple officially.", bg:"bg8.jpg", photo:"family_meeting.jpg"},
-  {chapter:"Chapter 9 – First Physical Meeting", dialogue:"The day we met physically, we hugged, kissed, and were just so happy. Being in each other’s company felt magical.", bg:"bg9.jpg", photo:"first_meeting.jpg"},
-  {chapter:"Chapter 10 – Engagement & Marriage", dialogue:"We traveled together, got engaged, and also married. Best time of my life!", bg:"bg10.jpg", photo:"engagement.jpg"},
-  {chapter:"Chapter 11 – Kite Festival", dialogue:"We enjoyed the kite festival together, creating memories I’ll cherish forever.", bg:"bg11.jpg", photo:"kite_festival.jpg"},
+  {chapter:"Chapter 1 – First Contact", dialogue:"I sent you a request on Shaadi.com, and you rejected it unknowingly. Two months later, I tried again, and this time, you accepted. Little did I know, the universe was aligning our paths. I didn’t expect you to respond, so I sent a request on Instagram — and you accepted there too. The first step of our story had begun.", bg:"bg1.jpg"},
+  {chapter:"Chapter 2 – The First Conversation", dialogue:"I nervously said, ‘Hey.’ You responded, ‘Hey.’ Then came the question, ‘Do we know each other?’ My heart skipped. That tiny exchange felt like the start of something magical.", bg:"bg2.jpg"},
+  {chapter:"Chapter 3 – Confidence & Notes", dialogue:"Even before we were officially together, I wrote in my notes: 'We will get married.' It was more than hope — it was certainty. The universe seemed to whisper, 'Trust the journey.'", bg:"bg3.jpg"},
+  {chapter:"Chapter 4 – Long Distance & Udaipur Trip", dialogue:"Our conversations were scattered at first. Time zones and distance made us ache to talk. During your Udaipur trip, the messages stopped. Silence made me wonder if fate was playing a game.", bg:"bg4.jpg"},
+  {chapter:"Chapter 5 – Heartbreak", dialogue:"Then one day, at exactly 12:12 PM, you wrote that we shouldn’t continue. My heart shattered. You liked me, but internal battles held you back. I thought the story had ended — but love has a way of returning.", bg:"bg5.jpg"},
+  {chapter:"Chapter 6 – Reunion & Going with the Flow", dialogue:"A week later, your message arrived again. Relief, joy, and hope rushed through me. We decided to let things flow, laugh, cry, fight, and see where life took us. And in that freedom, love bloomed.", bg:"bg6.jpg"},
+  {chapter:"Chapter 7 – Falling in Love", dialogue:"Months passed. We laughed until our cheeks hurt, fought over silly things, shared secrets under moonlight, and cried when words couldn’t express our feelings. Every conversation brought us closer. Our hearts intertwined, unbreakable.", bg:"bg7.jpg"},
+  {chapter:"Chapter 8 – Families Meet", dialogue:"The day our families met was surreal. Formal yet warm, official yet heartfelt. The universe smiled upon us as our love was embraced and blessed. Finally, the journey felt complete — we were officially a couple.", bg:"bg8.jpg", photo:"family_meeting.jpg"},
+  {chapter:"Chapter 9 – First Physical Meeting", dialogue:"Meeting you for the first time, finally in person, felt like coming home. We hugged, kissed, and every moment together felt electric. Time paused. Distance vanished. Only we existed in that bubble of happiness.", bg:"bg9.jpg", photo:"first_meeting.jpg"},
+  {chapter:"Chapter 10 – Engagement & Marriage", dialogue:"From traveling together to getting engaged, and then marrying — every moment felt like a dream. The joy, the laughter, the love — it was the best 1.5 months of my life, stitched together in memories that would last forever.", bg:"bg10.jpg", photo:"engagement.jpg"},
+  {chapter:"Chapter 11 – Our First Trip Together", dialogue:"Our first trip together was to Goa. Walking hand in hand along the sunlit beaches, feeling the waves kiss our feet, we laughed, explored, and created our first shared memories away from the world. Every sunset, every breeze, every playful moment reminded me how lucky I was to have you by my side. That trip was the beginning of countless adventures together.", bg:"bg11.jpg", photo:"goa_trip.jpg"},
   {final:true}
 ];
 
@@ -79,7 +112,6 @@ function showScene(scene){
     if(scene.photo){ photoEl.src = scene.photo; photoEl.style.transform="scale(1.05)"; } else { photoEl.src=""; }
     fadeIn(bgEl);
     fadeIn(cardEl);
-    // Reset photo zoom
     if(scene.photo) setTimeout(()=>{ photoEl.style.transform="scale(1)"; }, 7000);
   },1000);
 }
@@ -93,7 +125,7 @@ function runScenes(){
   }
   showScene(scenes[index]);
   index++;
-  setTimeout(runScenes, 8000); // cinematic timing
+  setTimeout(runScenes, 8000);
 }
 
 window.onload = function(){
@@ -112,7 +144,36 @@ function yes(){
   }
 }
 
-function no(){ alert("This option was never real ❤️"); }
+const playfulMessages = [
+  "Oops! This was never an option 😉",
+  "Try again, my heart belongs to you ❤️",
+  "No? Are you kidding me? 😜",
+  "This is a trick, right? 😘",
+  "Nice try! But yes is the only answer 😏",
+  "Love doesn't accept 'No' here ❤️"
+];
+
+function no() {
+  const message = playfulMessages[Math.floor(Math.random() * playfulMessages.length)];
+
+  // Create the message bubble
+  const bubble = document.createElement("div");
+  bubble.className = "no-bubble";
+  bubble.innerText = message;
+  document.body.appendChild(bubble);
+  setTimeout(() => bubble.remove(), 2000);
+
+  // Create multiple floating hearts
+  for (let i = 0; i < 5; i++) {
+    const heart = document.createElement("div");
+    heart.className = "heart-bubble";
+    heart.style.left = 50 + (Math.random() * 60 - 30) + "%";
+    heart.style.bottom = 100 + Math.random() * 20 + "px";
+    heart.style.animationDuration = (1 + Math.random()) + "s";
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 2000);
+  }
+}
 </script>
 </body>
 </html>
