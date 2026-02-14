@@ -17,7 +17,7 @@ html, body {
   text-align:center;
   max-width:900px;
   width:90%;
-  background: rgba(0,0,0,0.5); /* dark overlay for readability */
+  background: rgba(0,0,0,0.5);
   padding:30px 20px;
   border-radius:25px;
   box-shadow:0 10px 30px rgba(0,0,0,0.5);
@@ -100,18 +100,19 @@ button {
 
 <script>
 const scenes = [
-  {chapter:"First Contact", dialogue:"I sent you a request on Shaadi.com, and you rejected it unknowingly. Two months later, I tried again, and you accepted."},
-  {chapter:"The First Conversation", dialogue:"I nervously said, ‘Hey.’ You responded, ‘Hey.’ Then came the question, ‘Do we know each other?’ My heart skipped."},
-  {chapter:"Confidence & Notes", dialogue:"Even before we were officially together, I wrote in my notes: 'We will get married.' It felt like certainty."},
-  {chapter:"Long Distance & Udaipur Trip", dialogue:"Time zones and distance made us ache to talk. During your Udaipur trip, the messages stopped. Silence made me wonder if fate was playing a game."},
-  {chapter:"Heartbreak", dialogue:"Then one day, at exactly 12:12 PM, you wrote that we shouldn’t continue. My heart shattered."},
-  {chapter:"Reunion & Going with the Flow", dialogue:"A week later, your message arrived again. We decided to let things flow, laugh, cry, fight, and see where life took us."},
-  {chapter:"Falling in Love", dialogue:"Months passed. We laughed until our cheeks hurt, fought over silly things, shared secrets under moonlight, and cried when words couldn’t express our feelings."},
-  {chapter:"Families Meet", dialogue:"The day our families met was surreal. Formal yet warm, official yet heartfelt. Our love was embraced and blessed."},
-  {chapter:"First Physical Meeting", dialogue:"Meeting you for the first time, finally in person, felt like coming home. We hugged, kissed, and every moment together felt electric."},
-  {chapter:"Engagement & Marriage", dialogue:"From traveling together to getting engaged, and then marrying — every moment felt like a dream."},
-  {chapter:"Our First Trip Together", dialogue:"Our first trip together was to Goa. Walking hand in hand along the sunlit beaches, feeling the waves kiss our feet, we laughed, explored, and created our first shared memories."},
-  {chapter:"A Special Question", dialogue:"Will you be my Valentine?", final:true}
+  {chapter:"Chapter 1 – First Contact", dialogue:"I sent you a request on Shaadi.com, and you rejected it unknowingly. Two months later, I tried again, and you accepted. That tiny ‘accept’ changed my life forever."},
+  {chapter:"Chapter 2 – The First Conversation", dialogue:"I nervously typed, ‘Hey.’ You replied, ‘Hey.’ Just a simple greeting, but my heart was racing. Then came your question, ‘Do we know each other?’ My cheeks burned."},
+  {chapter:"Chapter 3 – Confidence & Notes", dialogue:"Even before we were officially together, I wrote in my notes: 'We will get married.' It wasn’t arrogance, just certainty. I pictured our wedding, our laughter, our shared life."},
+  {chapter:"Chapter 4 – Long Distance & Udaipur Trip", dialogue:"Time zones and distance stretched the days painfully. During your Udaipur trip, messages stopped, and I felt an ache I hadn’t known before. Every night, I whispered a silent wish that we would find our way back."},
+  {chapter:"Chapter 5 – Heartbreak", dialogue:"Then one day at exactly 12:12 PM, your message arrived: we shouldn’t continue. My heart shattered. It felt like losing a part of myself I had only just discovered."},
+  {chapter:"Chapter 6 – Reunion & Going with the Flow", dialogue:"A week later, your message arrived again. We decided to let life take its course — laugh, cry, fight, and grow together. Every moment with you felt precious."},
+  {chapter:"Chapter 7 – Falling in Love", dialogue:"Months passed. We laughed until our cheeks hurt, fought over silly things, shared secrets under moonlight, and cried when words couldn’t express our feelings. Love isn’t perfect, but it’s ours."},
+  {chapter:"Chapter 8 – Families Meet", dialogue:"The day our families met was surreal. Warm smiles, curious glances, quiet laughter — yet underneath, there was acceptance. Our love felt validated, embraced, and blessed."},
+  {chapter:"Chapter 9 – First Physical Meeting", dialogue:"Meeting you for the first time, finally in person, felt like coming home. The hug lingered, the kiss was gentle, and I felt the electric charge of connection."},
+  {chapter:"Chapter 10 – Engagement & Marriage", dialogue:"From traveling together, to getting engaged, and then marrying — every moment felt like a dream. From small breakfasts to chaotic preparations, every memory was a treasure."},
+  {chapter:"Chapter 11 – Our First Trip Together", dialogue:"Our first trip together was to Goa. Hand in hand, we walked along sunlit beaches, the waves kissing our feet. We laughed, explored, got lost in narrow lanes, and made memories that would forever be ours."},
+  {chapter:"Chapter 12 – Build-up", dialogue:"So, Purva… after all these moments we’ve shared, after all the laughter, tears, and memories…", final:false},
+  {chapter:"Chapter 13 – A Special Question", dialogue:"Will you be my Valentine?", final:true}
 ];
 
 let index=0;
@@ -136,7 +137,7 @@ function runScenes(){
   if(index >= scenes.length) return;
   const scene = scenes[index];
   if(scene.final){
-    // Do NOT fade out card
+    // Keep card visible
     showScene(scene);
     setTimeout(()=>{
       buttons.style.display = "block";
