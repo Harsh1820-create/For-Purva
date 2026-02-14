@@ -2,184 +2,206 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<title>For Purva ❤️</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Harsh & Purva – Love Story</title>
-<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Dancing+Script:wght@500;700&display=swap" rel="stylesheet">
+
 <style>
 html, body {
-  margin:0; padding:0; width:100%; height:100%;
-  font-family:'Dancing Script', cursive; color:white;
-  display:flex; justify-content:center; align-items:center;
-  background:url('my_bg.JPEG') center/cover no-repeat;
-  overflow:hidden;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Playfair Display', serif;
+  background:
+    linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)),
+    url('my_bg.JPEG') center/cover no-repeat;
 }
+
 .card {
-  text-align:center;
-  max-width:900px;
-  width:90%;
-  background: rgba(0,0,0,0.5);
-  padding:30px 25px;
-  border-radius:25px;
-  box-shadow:0 10px 30px rgba(0,0,0,0.5);
+  background: rgba(255,255,255,0.95);
+  max-width: 900px;
+  width: 90%;
+  padding: 35px;
+  border-radius: 24px;
+  box-shadow: 0 25px 60px rgba(0,0,0,0.4);
+  text-align: center;
 }
+
 #dialogue {
-  background: rgba(255,240,245,0.95);
-  color:#3b1f2b;
-  border-radius:20px;
-  padding:22px 28px;
-  font-size:clamp(18px,3.5vw,26px);
-  max-width:90%; margin:0 auto;
-  box-shadow:0 8px 20px rgba(0,0,0,0.3);
-  opacity:0; transform:translateY(50px);
-  transition: all 1s ease;
-  line-height:1.6;
+  font-size: clamp(18px, 3vw, 26px);
+  line-height: 1.7;
+  color: #3b1f2b;
+  min-height: 220px;
+  transition: 0.5s;
 }
-#buttons { 
-  display:none; 
-  margin-top:50px; 
-  position: relative; 
-  z-index: 1000; 
+
+.glow {
+  color: #ff2f6d;
+  font-size: clamp(22px, 4vw, 32px);
+  text-shadow: 0 0 10px #ff9ab3, 0 0 30px #ff5c8a;
 }
-button { 
-  padding:12px 28px; 
-  border-radius:30px; 
-  border:none; 
-  font-size:clamp(16px,2vw,20px); 
-  margin:8px; 
-  cursor:pointer; 
-  transition: transform 0.3s ease;
-  z-index: 1000;
+
+#buttons {
+  display: none;
+  margin-top: 30px;
 }
-#yes { background:white; color:#ff5c8a; font-family:'Playfair Display', serif;}
-#no { background:rgba(255,255,255,0.2); color:white; font-family:'Playfair Display', serif;}
-#yes:hover,#no:hover{transform: scale(1.05);}
-#signature { font-size:clamp(20px,2.5vw,26px); margin-top:15px; opacity:0; transform:scale(0.8); transition:all 2s ease; font-family:'Playfair Display', serif; text-align:center;}
-.heart { position:absolute; width:30px; height:30px; background:red;
+
+button {
+  padding: 14px 32px;
+  border: none;
+  border-radius: 30px;
+  font-size: 18px;
+  cursor: pointer;
+  margin: 10px;
+}
+
+#yes {
+  background: #ff5c8a;
+  color: white;
+}
+
+#no {
+  background: #ddd;
+  position: relative;
+}
+
+#signature {
+  margin-top: 25px;
+  font-family: 'Dancing Script', cursive;
+  font-size: 28px;
+  opacity: 0;
+  transition: 2s;
+}
+
+#forever {
+  opacity: 0;
+  margin-top: 25px;
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 1.4;
+  color: #ff2f6d;
+  text-align: center;
+  transition: 2s;
+}
+
+.heart {
+  position: fixed;
+  bottom: 0;
+  width: 20px;
+  height: 20px;
+  background: red;
   clip-path: polygon(50% 0%, 100% 35%, 80% 100%, 50% 80%, 20% 100%, 0 35%);
-  animation:hearts 2s linear forwards;}
-@keyframes hearts { 0%{transform:translateY(0) scale(0.5); opacity:1;} 100%{transform:translateY(-300px) scale(1.2); opacity:0;} }
-.no-bubble {
-  position: absolute; left: 50%; bottom: 100px; transform: translateX(-50%);
-  background: rgba(255,192,203,0.9); color:#800020;
-  padding:12px 20px; border-radius:25px;
-  font-family:'Playfair Display', serif; font-size:clamp(16px,2vw,20px);
-  opacity:0; pointer-events:none;
-  box-shadow:0 5px 15px rgba(0,0,0,0.3);
-  animation: floatUp 2s ease forwards;
-  z-index: 1000;
+  animation: float 4s linear forwards;
 }
-@keyframes floatUp { 0%{transform: translateX(-50%) translateY(0); opacity:1;} 100%{transform: translateX(-50%) translateY(-150px); opacity:0;} }
-.heart-bubble {
-  position:absolute; width:20px; height:20px; background:red;
-  clip-path: polygon(50% 0%,100% 35%,80% 100%,50% 80%,20% 100%,0 35%);
-  opacity:0; animation: floatHeart 2s ease forwards;
+
+@keyframes float {
+  from { transform: translateY(0); opacity: 1; }
+  to { transform: translateY(-400px); opacity: 0; }
 }
-@keyframes floatHeart { 0%{transform:translateY(0) scale(0.5); opacity:1;} 100%{transform:translateY(-150px) scale(1.2); opacity:0;} }
 </style>
 </head>
+
 <body>
+
+<!-- Background Music -->
+<audio id="bgMusic" loop>
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
 
 <div class="card">
   <div id="dialogue"></div>
+
   <div id="buttons">
-    <button id="yes" onclick="yes()">Yes 🧡</button>
-    <button id="no" onclick="no()">No 🙈</button>
+    <button id="yes" onclick="yes()">Yes ❤️</button>
+    <button id="no">No 🙈</button>
   </div>
-  <div id="signature">— From Harsh 🧡</div>
+
+  <div id="signature">— Always yours, Harsh ❤️</div>
+
+  <div id="forever">
+    I am always yours<br>
+    Forever and ever and ever
+  </div>
 </div>
 
 <script>
-const scenes = [
-  {dialogue:"Harsh first sent Purva a request on Shaadi.Com, and she rejected it unknowingly. After two months, he sent her again, and this time she accepted unknowingly. Thinking she might not respond on Shaadi.Com, he sent her a request on Instagram, which she accepted."},
-  {dialogue:"Harsh first said 'Hey'. Purva replied, 'Hey, Do we know each other?' It was 21st May 2025. She unfollowed him back. After that, they started having conversations on Instagram and WhatsApp."},
-  {dialogue:"Harsh wrote in his notes that they would get married before they were officially in a relationship. He was that sure. His mind often pictured their future together."},
-  {dialogue:"At first, their conversations were not very smooth. They had little time to talk as they were in a long-distance relationship. Then Purva went on a Udaipur trip, and their communication stopped completely."},
-  {dialogue:"One day after the trip, Purva messaged Harsh at 12:12 PM saying they should not take it further. His heart broke. She liked him but said no because she was fighting her internal battles."},
-  {dialogue:"Harsh thought it was all over. Suddenly, after a week, Purva messaged him again. He was elated. They talked and decided to go with the flow and see where it leads."},
-  {dialogue:"Then they laughed, fought, cried, and had serious conversations. Slowly, they fell in love with each other. Each day became precious."},
-  {dialogue:"Months passed. One day, their families met, and it was all official. The joy and relief were immense."},
-  {dialogue:"It was finally time for their first physical meeting after the long-distance period. They hugged, kissed, and were just so happy to be in each other’s company."},
-  {dialogue:"They traveled together, got engaged, and later married. Then they went on their first trip together to Goa. Walking hand in hand along sunlit beaches, laughing and exploring hidden streets, every moment became a cherished memory. It was the best 1.5 months of Harsh's life, filled with love and unforgettable experiences."},
-  {dialogue:"So, Purva… after all these moments, after every laugh, tear, fight, and memory…", final:false},
-  {dialogue:"Will you be my Valentine?", final:true}
+const story = [
+"Harsh first sent Purva a request on Shaadi.com, and she rejected it unknowingly. After two months, he sent her again, and this time she accepted unknowingly. Thinking she might not respond there, he sent her a request on Instagram, which she accepted.",
+"Harsh first said, ‘Hey.’ Purva replied, ‘Hey, do we know each other?’ It was 21st May 2025. She unfollowed him back. Soon, conversations began on Instagram and WhatsApp.",
+"Harsh wrote in his notes that they would get married even before they were officially in a relationship. He was that sure.",
+"At first, conversations were not smooth. Distance made time scarce. Then Purva went to Udaipur, and communication stopped completely.",
+"One day after the trip, at exactly 12:12 PM, Purva messaged that they should not take it further. His heart broke. She liked him, but her internal battles were stronger.",
+"Harsh thought it was the end. Then, after a week, she messaged again. He was elated. They decided to go with the flow.",
+"They laughed, fought, cried, and had difficult conversations. Somewhere in between, love quietly found its place.",
+"Months passed. Families met. Everything became official.",
+"Their first physical meeting after long distance was magical — hugs, kisses, and the comfort of finally being together.",
+"They traveled, got engaged, married, and went to Goa together — walking along beaches, sharing silences, creating memories. It was the best 1.5 months of Harsh’s life.",
+"So Purva… after everything…",
+"Will you be my Valentine?"
 ];
 
-let index=0;
-const dialogueEl=document.getElementById("dialogue");
-const buttons=document.getElementById("buttons");
-const signature=document.getElementById("signature");
+let i = 0;
+const box = document.getElementById("dialogue");
+const buttons = document.getElementById("buttons");
+const sign = document.getElementById("signature");
+const forever = document.getElementById("forever");
+const music = document.getElementById("bgMusic");
 
-function fadeIn(el){ el.style.opacity=1; el.style.transform="scale(1) translateY(0)"; }
+// Start music on first interaction (mobile safe)
+document.addEventListener("click", () => {
+  if (music.paused) {
+    music.volume = 0.4;
+    music.play();
+  }
+});
 
-function showScene(scene){
-  dialogueEl.innerText = scene.dialogue || "";
-  dialogueEl.style.opacity=0; dialogueEl.style.transform="translateY(50px)";
-  fadeIn(dialogueEl);
-}
+function showStory() {
+  box.innerText = story[i];
+  box.classList.remove("glow");
 
-function runScenes(){
-  if(index >= scenes.length) return;
-  const scene = scenes[index];
-  if(scene.final){
-    showScene(scene);
-    setTimeout(()=>{
-      buttons.style.display = "block";
-      fadeIn(buttons);
-    },1000);
+  if (i === story.length - 1) {
+    box.classList.add("glow");
+    buttons.style.display = "block";
     return;
   }
-  showScene(scene);
-  index++;
-  setTimeout(runScenes,7000);
+
+  i++;
+  setTimeout(showStory, 5500);
 }
+showStory();
 
-window.onload=function(){
-  showScene(scenes[index]);
-  index++;
-  setTimeout(runScenes,7000);
-}
+function yes() {
+  buttons.style.display = "none";
+  sign.style.opacity = 1;
 
-const playfulMessages=[
-  "Oops! This was never an option 😉",
-  "Try again, my heart belongs to you ❤️",
-  "No? Are you kidding me? 😜",
-  "This is a trick, right? 😘",
-  "Nice try! But yes is the only answer 😏",
-  "Love doesn't accept 'No' here ❤️"
-];
-
-function yes(){
-  buttons.style.display="none";
-  fadeIn(signature);
-  signature.innerText="Thank you for choosing me — always. — From Harsh ❤️";
-  for(let i=0;i<20;i++){
-    const heart=document.createElement("div"); 
-    heart.className="heart";
-    heart.style.left=Math.random()*90 + "%";
-    heart.style.bottom="0px";
-    heart.style.animationDuration=(1+Math.random()*2) + "s";
-    document.body.appendChild(heart);
-    setTimeout(()=>heart.remove(),3000);
+  for (let j = 0; j < 30; j++) {
+    let h = document.createElement("div");
+    h.className = "heart";
+    h.style.left = Math.random() * 100 + "%";
+    document.body.appendChild(h);
+    setTimeout(() => h.remove(), 4000);
   }
+
+  setTimeout(() => {
+    forever.style.opacity = 1;
+    music.pause();        // 🔕 MUSIC STOPS HERE
+    music.currentTime = 0;
+  }, 2000);
 }
 
-function no(){
-  const message=playfulMessages[Math.floor(Math.random()*playfulMessages.length)];
-  const bubble=document.createElement("div");
-  bubble.className="no-bubble";
-  bubble.innerText=message;
-  document.body.appendChild(bubble);
-  setTimeout(()=>bubble.remove(),2000);
-  for(let i=0;i<5;i++){
-    const heart=document.createElement("div");
-    heart.className="heart-bubble";
-    heart.style.left=50+(Math.random()*60-30)+"%";
-    heart.style.bottom=100+Math.random()*20+"px";
-    heart.style.animationDuration=(1+Math.random())+"s";
-    document.body.appendChild(heart);
-    setTimeout(()=>heart.remove(),2000);
-  }
-}
+// Playful No button
+const noBtn = document.getElementById("no");
+noBtn.addEventListener("mouseenter", () => {
+  const x = Math.random() * 200 - 100;
+  const y = Math.random() * 120 - 60;
+  noBtn.style.transform = `translate(${x}px, ${y}px)`;
+});
 </script>
+
 </body>
 </html>
