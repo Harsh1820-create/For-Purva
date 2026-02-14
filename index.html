@@ -2,68 +2,140 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Almost Missed → Forever</title>
+<title>Our Story – Animated Conversation</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 
 <style>
-:root {
-  --text-size: clamp(20px, 2.4vw, 26px);
-}
-
 body {
   margin:0;
   height:100vh;
-  background: radial-gradient(circle at top, #ff9aa2, #7b2c3f 60%);
-  font-family:'Dancing Script', serif;
-  color:white;
+  background: url('background.jpg') center/cover no-repeat;
+  font-family:'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   display:flex;
   justify-content:center;
   align-items:center;
   overflow:hidden;
+  position:relative;
+  color:white;
+}
+
+body::before {
+  content:"";
+  position:absolute;
+  top:0; left:0;
+  width:100%; height:100%;
+  background: rgba(0,0,0,0.25);
+  pointer-events:none;
+  z-index:0;
+}
+
+body::after {
+  content:"";
+  position:absolute;
+  top:0; left:0;
+  width:100%; height:100%;
+  pointer-events:none;
+  background: url('grain.png') repeat;
+  opacity:0.08;
+  z-index:1;
+  animation:grainAnim 0.5s infinite;
+}
+
+@keyframes grainAnim {
+  0% { background-position:0 0; }
+  50% { background-position:100px 100px; }
+  100% { background-position:0 0; }
 }
 
 .card {
+  position:relative;
   width:100%;
-  height:100%;
   max-width:1100px;
+  height:100%;
   padding:6vh 6vw;
   box-sizing:border-box;
-  position:relative;
+  z-index:2;
+}
+
+#chapter {
+  position:absolute;
+  top:10px;
+  left:50%;
+  transform:translateX(-50%);
+  font-size:20px;
+  font-weight:500;
+  opacity:0;
+  transition: opacity 0.8s ease, transform 0.8s ease;
 }
 
 #date {
   position:absolute;
-  top:20px;
-  right:30px;
-  font-size:14px;
-  opacity:0.7;
+  top:40px;
+  left:50%;
+  transform:translateX(-50%);
+  font-size:28px;
+  font-weight:500;
+  opacity:0;
+  text-shadow:1px 1px 8px rgba(0,0,0,0.5);
+  transition: opacity 0.8s ease, transform 0.8s ease;
 }
 
-#text {
-  font-size:var(--text-size);
-  line-height:1.8;
-  max-width:900px;
-  animation:fadeIn 1s ease;
-}
-
-#text::after {
-  content:" |";
-  animation:blink 1s infinite;
-}
-
-@keyframes blink {
-  0%,50%{opacity:1;}
-  51%,100%{opacity:0;}
-}
-
-img {
+#conversation {
+  position:absolute;
+  bottom:20px;
   width:100%;
-  max-height:60vh;
-  object-fit:contain;
-  margin-top:30px;
+  display:flex;
+  justify-content:space-between;
+  padding:0 50px;
+  box-sizing:border-box;
+}
+
+.avatar {
+  width:150px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+
+.avatar img {
+  width:100%;
+  border-radius:50%;
+  border:2px solid white;
+  animation: bob 2s ease-in-out infinite, blink 5s ease-in-out infinite;
+}
+
+.avatar.boy img { animation-name: bobBoy, blink; }
+.avatar.girl img { animation-name: bobGirl, blink; }
+
+@keyframes bobBoy { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-3px); } }
+@keyframes bobGirl { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-3px); } }
+@keyframes blink { 0%,20%,60%,100% { transform:scaleY(1); } 10%,70% { transform:scaleY(0.1); } }
+
+.speech {
+  background: rgba(255,255,255,0.85);
+  color:#000;
   border-radius:20px;
+  padding:10px 15px;
+  max-width:250px;
+  margin-top:10px;
+  opacity:0;
+  transform: translateY(10px);
+  transition: opacity 0.8s ease, transform 0.6s ease;
+}
+
+.speech.show {
+  opacity:1;
+  transform: translateY(0);
+}
+
+#media img {
+  width:100%;
+  max-height:50vh;
+  object-fit:contain;
+  border-radius:20px;
+  margin-top:20px;
   opacity:0;
   animation:photoFade 5s ease forwards;
 }
@@ -78,6 +150,7 @@ img {
 #buttons {
   display:none;
   margin-top:40px;
+  text-align:center;
 }
 
 button {
@@ -96,6 +169,7 @@ button {
   margin-top:30px;
   font-size:26px;
   opacity:0;
+  text-align:center;
   transition:opacity 2s;
 }
 
@@ -107,19 +181,25 @@ button {
   from { transform:scale(1); }
   to { transform:scale(1.08); }
 }
-
-@keyframes fadeIn {
-  from{opacity:0;}
-  to{opacity:1;}
-}
 </style>
 </head>
 
 <body>
-<div class="card" onclick="next()">
+<div class="card">
+  <div id="chapter"></div>
   <div id="date"></div>
-  <div id="text"></div>
   <div id="media"></div>
+
+  <div id="conversation">
+    <div class="avatar boy">
+      <img src="boy.png" />
+      <div class="speech" id="speech-boy"></div>
+    </div>
+    <div class="avatar girl">
+      <img src="girl.png" />
+      <div class="speech" id="speech-girl"></div>
+    </div>
+  </div>
 
   <div id="buttons">
     <button id="yes" onclick="yes(event)">Yes ❤️</button>
@@ -132,35 +212,32 @@ button {
 <audio id="music"></audio>
 
 <script>
-const scenes = [
-  { text:"This story almost never happened…" },
-
-  { text:"I sent you a request on Shaadi.com. You rejected it… unknowingly." },
-  { text:"Two months later… you accepted it. Unknowingly again." },
-
-  { date:"24th May 2025", text:"I wrote something in my notes — long before we were together.", note:"We will get married." },
-
-  { text:"We talked from far away. Time was limited. Distance was loud.", image:"photo1.jpg" },
-
-  { date:"9th June 2025", text:"At 12:12 PM… you said we should not take it further." },
-
-  { date:"15th June 2025", text:"A week later… you messaged again. Just one word. Hey." },
-
-  { text:"We decided to go with the flow. And somewhere between laughs, fights and tears… we fell in love." },
-
-  { date:"2nd December 2025", text:"Distance finally ended.", image:"photo2.jpg" },
-
-  { date:"14th December 2025", text:"We travelled. We got engaged. We got married. We lived.", image:"photo3.jpg" },
-  { image:"photo4.jpg" },
-
+const conversationScenes = [
+  { chapter:"Chapter 1 – Beginning", date:"21st May 2025", speaker:"boy", text:"Hey!" },
+  { speaker:"girl", text:"Hey, do we know each other?" },
+  { speaker:"boy", text:"Yes… I sent a request on Shaadi.com ❤️" },
+  { speaker:"girl", text:"Oh… I didn’t notice before!" },
+  { chapter:"Chapter 2 – Distance", date:"24th May 2025", speaker:"boy", text:"We started chatting on Insta and WhatsApp." },
+  { speaker:"girl", text:"It was confusing at first…" },
+  { speaker:"boy", text:"I knew somehow… we will be together." },
+  { chapter:"Chapter 3 – Heartbreak", date:"9th June 2025", speaker:"girl", text:"I think we shouldn’t continue…" },
+  { speaker:"boy", text:"…my heart broke 😢" },
+  { chapter:"Chapter 4 – Hope Returns", date:"15th June 2025", speaker:"girl", text:"Hey… maybe we can go with the flow?" },
+  { speaker:"boy", text:"Yes, let’s see where this goes ❤️" },
+  { chapter:"Chapter 5 – First Meeting", date:"2nd December 2025", speaker:"boy", text:"Finally meeting you in person!" , image:"photo2.jpg" },
+  { speaker:"girl", text:"I am so happy to see you 😍" },
+  { chapter:"Chapter 6 – Forever", date:"14th December 2025", speaker:"boy", text:"We got engaged, married, and celebrated together.", image:"photo3.jpg" },
+  { speaker:"girl", text:"The best 1.5 months of my life!" , image:"photo4.jpg" },
   { final:true }
 ];
 
-let index=0, typing=false;
-const textEl=document.getElementById("text");
-const media=document.getElementById("media");
+let index=0;
+const chapterEl=document.getElementById("chapter");
 const dateEl=document.getElementById("date");
 const music=document.getElementById("music");
+const textBoy=document.getElementById("speech-boy");
+const textGirl=document.getElementById("speech-girl");
+const media=document.getElementById("media");
 
 const tracks={
   start:"music1.mp3",
@@ -174,63 +251,69 @@ function play(src){
   music.play();
 }
 
-function type(txt, cb){
-  typing=true;
-  textEl.innerText="";
-  let words=txt.split(" "), i=0;
-  let t=setInterval(()=>{
-    textEl.innerText+=words[i]+" ";
-    i++;
-    if(i>=words.length){
-      clearInterval(t);
-      typing=false;
-      if(cb)cb();
-    }
-  },160);
-}
+function nextConvo(){
+  if(index>=conversationScenes.length) return;
 
-function next(){
-  if(typing || index>=scenes.length) return;
+  const s=conversationScenes[index];
 
-  const s=scenes[index];
-  media.innerHTML="";
-  dateEl.innerText=s.date||"";
-
-  if(index===0) play(tracks.start);
-  if(index===5) music.pause();
-  if(index===6) play(tracks.hope);
-  if(index===8) play(tracks.forever);
-
-  if(s.note){
-    type(s.text, ()=> type(s.note));
-  } else if(s.text){
-    type(s.text);
+  if(s.chapter) {
+    chapterEl.style.opacity=0;
+    chapterEl.innerText=s.chapter;
+    setTimeout(()=>{chapterEl.style.transition="opacity 0.8s"; chapterEl.style.opacity=1;},50);
+  }
+  if(s.date) {
+    dateEl.style.opacity=0;
+    dateEl.innerText=s.date;
+    setTimeout(()=>{dateEl.style.transition="opacity 0.8s"; dateEl.style.opacity=1;},50);
   }
 
   if(s.image){
     media.innerHTML=`<img src="${s.image}">`;
   }
 
+  if(s.speaker==="boy"){
+    textBoy.innerText=s.text;
+    textBoy.classList.add("show");
+    textGirl.classList.remove("show");
+  } else if(s.speaker==="girl"){
+    textGirl.innerText=s.text;
+    textGirl.classList.add("show");
+    textBoy.classList.remove("show");
+  }
+
+  if(index===0) play(tracks.start);
+  if(index===7) music.pause();
+  if(index===9) play(tracks.hope);
+  if(index===12) play(tracks.forever);
+
   if(s.final){
     music.pause();
-    textEl.classList.add("zoom");
-    type("After every almost… every pause… and every leap of faith…", ()=>{
-      setTimeout(()=>{
-        type("Will you be my Valentine… again?");
-        document.getElementById("buttons").style.display="block";
-      },800);
-    });
+    setTimeout(()=>{
+      textBoy.classList.remove("show");
+      textGirl.classList.remove("show");
+      media.innerHTML="";
+      chapterEl.innerText="";
+      dateEl.innerText="";
+      const finalText=document.createElement("div");
+      finalText.style.fontSize="26px";
+      finalText.style.textAlign="center";
+      finalText.innerText="Will you be my Valentine… again?";
+      document.querySelector(".card").appendChild(finalText);
+      document.getElementById("buttons").style.display="block";
+    },1200);
   }
 
   index++;
 }
 
+document.querySelector(".card").addEventListener("click", nextConvo);
+
 function yes(e){
   e.stopPropagation();
   document.getElementById("buttons").style.display="none";
-  type("Thank you for choosing me — again. Always.", ()=>{
-    document.getElementById("signature").style.opacity=1;
-  });
+  const signature=document.getElementById("signature");
+  signature.style.opacity=1;
+  signature.innerText="Thank you for choosing me — again. Always. — From Harsh ❤️";
 }
 
 function no(e){
