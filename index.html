@@ -9,7 +9,7 @@
 html, body { margin:0; padding:0; width:100%; height:100%; overflow:hidden; font-family:'Dancing Script', cursive; color:white;}
 #background { 
   position:absolute; top:0; left:0; width:100%; height:100%; 
-  background: url('my_bg.jpeg') center/cover no-repeat;
+  background: url('my_bg.JPEG') center/cover no-repeat;
   z-index:-1; transition: all 2s ease-in-out; transform:scale(1); opacity:1;
 }
 .card { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:90%; max-width:900px; text-align:center; z-index:2; opacity:0; transition: opacity 1s ease;}
@@ -60,17 +60,17 @@ button { padding:12px 28px; border-radius:30px; border:none; font-size:clamp(16p
 
 <script>
 const scenes = [
-  {chapter:"Chapter 1 – First Contact", dialogue:"I sent you a request on Shaadi.com, and you rejected it unknowingly. Two months later, I tried again, and this time, you accepted. Little did I know, the universe was aligning our paths. I didn’t expect you to respond, so I sent a request on Instagram — and you accepted there too. The first step of our story had begun.", bg:"my_bg.jpeg"},
-  {chapter:"Chapter 2 – The First Conversation", dialogue:"I nervously said, ‘Hey.’ You responded, ‘Hey.’ Then came the question, ‘Do we know each other?’ My heart skipped. That tiny exchange felt like the start of something magical.", bg:"my_bg.jpeg"},
-  {chapter:"Chapter 3 – Confidence & Notes", dialogue:"Even before we were officially together, I wrote in my notes: 'We will get married.' It was more than hope — it was certainty. The universe seemed to whisper, 'Trust the journey.'", bg:"my_bg.jpeg"},
-  {chapter:"Chapter 4 – Long Distance & Udaipur Trip", dialogue:"Our conversations were scattered at first. Time zones and distance made us ache to talk. During your Udaipur trip, the messages stopped. Silence made me wonder if fate was playing a game.", bg:"my_bg.jpeg"},
-  {chapter:"Chapter 5 – Heartbreak", dialogue:"Then one day, at exactly 12:12 PM, you wrote that we shouldn’t continue. My heart shattered. You liked me, but internal battles held you back. I thought the story had ended — but love has a way of returning.", bg:"my_bg.jpeg"},
-  {chapter:"Chapter 6 – Reunion & Going with the Flow", dialogue:"A week later, your message arrived again. Relief, joy, and hope rushed through me. We decided to let things flow, laugh, cry, fight, and see where life took us. And in that freedom, love bloomed.", bg:"my_bg.jpeg"},
-  {chapter:"Chapter 7 – Falling in Love", dialogue:"Months passed. We laughed until our cheeks hurt, fought over silly things, shared secrets under moonlight, and cried when words couldn’t express our feelings. Every conversation brought us closer. Our hearts intertwined, unbreakable.", bg:"my_bg.jpeg"},
-  {chapter:"Chapter 8 – Families Meet", dialogue:"The day our families met was surreal. Formal yet warm, official yet heartfelt. The universe smiled upon us as our love was embraced and blessed. Finally, the journey felt complete — we were officially a couple.", bg:"my_bg.jpeg", photo:"family_meeting.jpg"},
-  {chapter:"Chapter 9 – First Physical Meeting", dialogue:"Meeting you for the first time, finally in person, felt like coming home. We hugged, kissed, and every moment together felt electric. Time paused. Distance vanished. Only we existed in that bubble of happiness.", bg:"my_bg.jpeg", photo:"first_meeting.jpg"},
-  {chapter:"Chapter 10 – Engagement & Marriage", dialogue:"From traveling together to getting engaged, and then marrying — every moment felt like a dream. The joy, the laughter, the love — it was the best 1.5 months of my life, stitched together in memories that would last forever.", bg:"my_bg.jpeg", photo:"engagement.jpg"},
-  {chapter:"Chapter 11 – Our First Trip Together", dialogue:"Our first trip together was to Goa. Walking hand in hand along the sunlit beaches, feeling the waves kiss our feet, we laughed, explored, and created our first shared memories away from the world. Every sunset, every breeze, every playful moment reminded me how lucky I was to have you by my side. That trip was the beginning of countless adventures together.", bg:"my_bg.jpeg", photo:"goa_trip.jpg"},
+  {chapter:"Chapter 1 – First Contact", dialogue:"I sent you a request on Shaadi.com, and you rejected it unknowingly. Two months later, I tried again, and this time, you accepted. Little did I know, the universe was aligning our paths. I didn’t expect you to respond, so I sent a request on Instagram — and you accepted there too. The first step of our story had begun.", bg:"my_bg.JPEG"},
+  {chapter:"Chapter 2 – The First Conversation", dialogue:"I nervously said, ‘Hey.’ You responded, ‘Hey.’ Then came the question, ‘Do we know each other?’ My heart skipped. That tiny exchange felt like the start of something magical.", bg:"my_bg.JPEG"},
+  {chapter:"Chapter 3 – Confidence & Notes", dialogue:"Even before we were officially together, I wrote in my notes: 'We will get married.' It was more than hope — it was certainty. The universe seemed to whisper, 'Trust the journey.'", bg:"my_bg.JPEG"},
+  {chapter:"Chapter 4 – Long Distance & Udaipur Trip", dialogue:"Our conversations were scattered at first. Time zones and distance made us ache to talk. During your Udaipur trip, the messages stopped. Silence made me wonder if fate was playing a game.", bg:"my_bg.JPEG"},
+  {chapter:"Chapter 5 – Heartbreak", dialogue:"Then one day, at exactly 12:12 PM, you wrote that we shouldn’t continue. My heart shattered. You liked me, but internal battles held you back. I thought the story had ended — but love has a way of returning.", bg:"my_bg.JPEG"},
+  {chapter:"Chapter 6 – Reunion & Going with the Flow", dialogue:"A week later, your message arrived again. Relief, joy, and hope rushed through me. We decided to let things flow, laugh, cry, fight, and see where life took us. And in that freedom, love bloomed.", bg:"my_bg.JPEG"},
+  {chapter:"Chapter 7 – Falling in Love", dialogue:"Months passed. We laughed until our cheeks hurt, fought over silly things, shared secrets under moonlight, and cried when words couldn’t express our feelings. Every conversation brought us closer. Our hearts intertwined, unbreakable.", bg:"my_bg.JPEG"},
+  {chapter:"Chapter 8 – Families Meet", dialogue:"The day our families met was surreal. Formal yet warm, official yet heartfelt. The universe smiled upon us as our love was embraced and blessed. Finally, the journey felt complete — we were officially a couple.", bg:"my_bg.JPEG", photo:"family_meeting.jpg"},
+  {chapter:"Chapter 9 – First Physical Meeting", dialogue:"Meeting you for the first time, finally in person, felt like coming home. We hugged, kissed, and every moment together felt electric. Time paused. Distance vanished. Only we existed in that bubble of happiness.", bg:"my_bg.JPEG", photo:"first_meeting.jpg"},
+  {chapter:"Chapter 10 – Engagement & Marriage", dialogue:"From traveling together to getting engaged, and then marrying — every moment felt like a dream. The joy, the laughter, the love — it was the best 1.5 months of my life, stitched together in memories that would last forever.", bg:"my_bg.JPEG", photo:"engagement.jpg"},
+  {chapter:"Chapter 11 – Our First Trip Together", dialogue:"Our first trip together was to Goa. Walking hand in hand along the sunlit beaches, feeling the waves kiss our feet, we laughed, explored, and created our first shared memories away from the world. Every sunset, every breeze, every playful moment reminded me how lucky I was to have you by my side. That trip was the beginning of countless adventures together.", bg:"my_bg.JPEG", photo:"goa_trip.jpg"},
   {final:true}
 ];
 
@@ -127,10 +127,8 @@ function yes() {
   signature.style.opacity = 0;
   signature.style.transform = "scale(0.8)";
   setTimeout(()=>{ signature.style.opacity=1; signature.style.transform="scale(1)"; },50);
+  bgEl.style.background = "url('my_bg.JPEG') center/cover no-repeat";
 
-  bgEl.style.background = "url('my_bg.jpeg') center/cover no-repeat";
-
-  // Floating hearts
   for(let i=0;i<20;i++){
     const heart=document.createElement("div"); 
     heart.className="heart";
