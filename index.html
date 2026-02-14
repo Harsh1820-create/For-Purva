@@ -6,42 +6,88 @@
 <title>Our Love Story – Cinematic</title>
 <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
 <style>
-html, body { margin:0; padding:0; width:100%; height:100%; overflow:hidden; font-family:'Dancing Script', cursive; color:white;}
-#background { 
-  position:absolute; top:0; left:0; width:100%; height:100%; 
-  background: url('my_bg.JPEG') center/cover no-repeat;
-  z-index:-1; transition: all 2s ease-in-out; transform:scale(1); opacity:1;
+/* --- Body & Centering --- */
+html, body {
+  margin:0; padding:0; width:100%; height:100%;
+  font-family:'Dancing Script', cursive; color:white;
+  display:flex; justify-content:center; align-items:center;
+  background:url('my_bg.JPEG') center/cover no-repeat;
+  overflow:hidden;
 }
-.card { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:90%; max-width:900px; text-align:center; z-index:2;}
-#chapter { font-family:'Playfair Display', serif; font-size:clamp(36px,6vw,60px); font-weight:700; color:#ffe0e6; margin-bottom:20px; text-shadow:0 2px 15px rgba(0,0,0,0.6); opacity:0; transform:scale(0.8); transition: all 1s ease; }
-#dialogue { background: rgba(255, 240, 245, 0.85); color: #3b1f2b; border-radius:20px; padding:16px 24px; font-size:clamp(18px,3.5vw,26px); max-width:90%; margin:0 auto; box-shadow:0 8px 20px rgba(0,0,0,0.3); opacity:0; transform:translateY(50px); transition: all 1s ease; }
-#buttons { display:none; margin-top:20px;}
+
+/* --- Card Container --- */
+.card {
+  text-align:center;
+  max-width:900px;
+  width:90%;
+}
+
+/* --- Scene Heading --- */
+#chapter {
+  font-family:'Playfair Display', serif; 
+  font-size:clamp(36px,6vw,60px); 
+  font-weight:700; 
+  color:#ffe0e6; 
+  margin-bottom:20px; 
+  text-shadow:0 2px 15px rgba(0,0,0,0.6); 
+  opacity:0; transform:scale(0.8);
+  transition: all 1s ease;
+}
+
+/* --- Dialogue Box --- */
+#dialogue {
+  background: rgba(255,240,245,0.85);
+  color:#3b1f2b;
+  border-radius:20px;
+  padding:16px 24px;
+  font-size:clamp(18px,3.5vw,26px);
+  max-width:90%; margin:0 auto;
+  box-shadow:0 8px 20px rgba(0,0,0,0.3);
+  opacity:0; transform:translateY(50px);
+  transition: all 1s ease;
+}
+
+/* --- Buttons --- */
+#buttons { display:none; margin-top:20px; }
 button { padding:12px 28px; border-radius:30px; border:none; font-size:clamp(16px,2vw,20px); margin:8px; cursor:pointer; transition: transform 0.3s ease;}
 #yes { background:white; color:#ff5c8a; font-family:'Playfair Display', serif;}
 #no { background:rgba(255,255,255,0.2); color:white; font-family:'Playfair Display', serif;}
 #yes:hover,#no:hover{transform: scale(1.05);}
+
+/* --- Signature --- */
 #signature { font-size:clamp(20px,2.5vw,26px); margin-top:15px; opacity:0; transform:scale(0.8); transition:all 2s ease; font-family:'Playfair Display', serif; text-align:center;}
-.heart { position:absolute; width:30px; height:30px; background:red; clip-path: polygon(50% 0%, 100% 35%, 80% 100%, 50% 80%, 20% 100%, 0 35%); animation:hearts 2s linear forwards;}
+
+/* --- Floating Hearts --- */
+.heart {
+  position:absolute; width:30px; height:30px; background:red;
+  clip-path: polygon(50% 0%, 100% 35%, 80% 100%, 50% 80%, 20% 100%, 0 35%);
+  animation:hearts 2s linear forwards;
+}
 @keyframes hearts { 0%{transform:translateY(0) scale(0.5); opacity:1;} 100%{transform:translateY(-300px) scale(1.2); opacity:0;} }
 
+/* --- Playful "No" Bubbles --- */
 .no-bubble {
   position: absolute; left: 50%; bottom: 100px; transform: translateX(-50%);
-  background: rgba(255, 192, 203, 0.9); color: #800020; padding: 12px 20px; border-radius: 25px;
-  font-family: 'Playfair Display', serif; font-size: clamp(16px, 2vw, 20px); opacity: 0; pointer-events: none;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.3); animation: floatUp 2s ease forwards;
+  background: rgba(255,192,203,0.9); color:#800020;
+  padding:12px 20px; border-radius:25px;
+  font-family:'Playfair Display', serif; font-size:clamp(16px,2vw,20px);
+  opacity:0; pointer-events:none;
+  box-shadow:0 5px 15px rgba(0,0,0,0.3);
+  animation: floatUp 2s ease forwards;
 }
-@keyframes floatUp { 0% { transform: translateX(-50%) translateY(0); opacity:1; } 100% { transform: translateX(-50%) translateY(-150px); opacity:0; } }
+@keyframes floatUp { 0%{transform: translateX(-50%) translateY(0); opacity:1;} 100%{transform: translateX(-50%) translateY(-150px); opacity:0;} }
 
+/* --- Small Floating Hearts for "No" --- */
 .heart-bubble {
-  position: absolute; width: 20px; height: 20px; background: red;
-  clip-path: polygon(50% 0%, 100% 35%, 80% 100%, 50% 80%, 20% 100%, 0 35%); opacity:0; animation: floatHeart 2s ease forwards;
+  position:absolute; width:20px; height:20px; background:red;
+  clip-path: polygon(50% 0%,100% 35%,80% 100%,50% 80%,20% 100%,0 35%);
+  opacity:0; animation: floatHeart 2s ease forwards;
 }
-@keyframes floatHeart { 0% { transform:translateY(0) scale(0.5); opacity:1; } 100% { transform:translateY(-150px) scale(1.2); opacity:0; } }
+@keyframes floatHeart { 0%{transform:translateY(0) scale(0.5); opacity:1;} 100%{transform:translateY(-150px) scale(1.2); opacity:0;} }
 </style>
 </head>
 <body>
 
-<div id="background"></div>
 <div class="card">
   <div id="chapter"></div>
   <div id="dialogue"></div>
@@ -78,7 +124,6 @@ const dialogueEl=document.getElementById("dialogue");
 const cardEl=document.querySelector(".card");
 const buttons=document.getElementById("buttons");
 const signature=document.getElementById("signature");
-const bgEl=document.getElementById("background");
 const music=document.getElementById("bgMusic");
 
 function fadeIn(el){ el.style.opacity=1; el.style.transform="scale(1) translateY(0)"; }
@@ -89,7 +134,6 @@ function showScene(scene){
   setTimeout(()=>{
     chapterEl.innerText=scene.chapter||"";
     dialogueEl.innerText=scene.dialogue||"";
-    // Animate heading and dialogue separately
     chapterEl.style.opacity=0; chapterEl.style.transform="scale(0.8)";
     dialogueEl.style.opacity=0; dialogueEl.style.transform="translateY(50px)";
     fadeIn(chapterEl);
