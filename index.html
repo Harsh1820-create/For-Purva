@@ -12,10 +12,9 @@ html, body { margin:0; padding:0; width:100%; height:100%; overflow:hidden; font
   background: url('my_bg.JPEG') center/cover no-repeat;
   z-index:-1; transition: all 2s ease-in-out; transform:scale(1); opacity:1;
 }
-.card { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:90%; max-width:900px; text-align:center; z-index:2; opacity:0; transition: opacity 1s ease;}
-#chapter { font-family:'Playfair Display', serif; font-size:clamp(36px,6vw,60px); font-weight:700; color:#ffe0e6; margin-bottom:20px; text-shadow:0 2px 10px rgba(0,0,0,0.6); }
-#dialogue { background: rgba(255, 240, 245, 0.85); color: #3b1f2b; border-radius:20px; padding:16px 24px; font-size:clamp(18px,3.5vw,26px); max-width:90%; margin:0 auto; box-shadow:0 8px 20px rgba(0,0,0,0.3); }
-#photo { margin-top:15px; max-width:90%; border-radius:15px; transition: transform 7s ease; }
+.card { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:90%; max-width:900px; text-align:center; z-index:2;}
+#chapter { font-family:'Playfair Display', serif; font-size:clamp(36px,6vw,60px); font-weight:700; color:#ffe0e6; margin-bottom:20px; text-shadow:0 2px 15px rgba(0,0,0,0.6); opacity:0; transform:scale(0.8); transition: all 1s ease; }
+#dialogue { background: rgba(255, 240, 245, 0.85); color: #3b1f2b; border-radius:20px; padding:16px 24px; font-size:clamp(18px,3.5vw,26px); max-width:90%; margin:0 auto; box-shadow:0 8px 20px rgba(0,0,0,0.3); opacity:0; transform:translateY(50px); transition: all 1s ease; }
 #buttons { display:none; margin-top:20px;}
 button { padding:12px 28px; border-radius:30px; border:none; font-size:clamp(16px,2vw,20px); margin:8px; cursor:pointer; transition: transform 0.3s ease;}
 #yes { background:white; color:#ff5c8a; font-family:'Playfair Display', serif;}
@@ -46,7 +45,6 @@ button { padding:12px 28px; border-radius:30px; border:none; font-size:clamp(16p
 <div class="card">
   <div id="chapter"></div>
   <div id="dialogue"></div>
-  <img id="photo" src="">
   <div id="buttons">
     <button id="yes" onclick="yes()">Yes ❤️</button>
     <button id="no" onclick="no()">No 🙈</button>
@@ -60,41 +58,43 @@ button { padding:12px 28px; border-radius:30px; border:none; font-size:clamp(16p
 
 <script>
 const scenes = [
-  {chapter:"Chapter 1 – First Contact", dialogue:"I sent you a request on Shaadi.com, and you rejected it unknowingly. Two months later, I tried again, and this time, you accepted. Little did I know, the universe was aligning our paths. I didn’t expect you to respond, so I sent a request on Instagram — and you accepted there too. The first step of our story had begun.", bg:"my_bg.JPEG"},
-  {chapter:"Chapter 2 – The First Conversation", dialogue:"I nervously said, ‘Hey.’ You responded, ‘Hey.’ Then came the question, ‘Do we know each other?’ My heart skipped. That tiny exchange felt like the start of something magical.", bg:"my_bg.JPEG"},
-  {chapter:"Chapter 3 – Confidence & Notes", dialogue:"Even before we were officially together, I wrote in my notes: 'We will get married.' It was more than hope — it was certainty. The universe seemed to whisper, 'Trust the journey.'", bg:"my_bg.JPEG"},
-  {chapter:"Chapter 4 – Long Distance & Udaipur Trip", dialogue:"Our conversations were scattered at first. Time zones and distance made us ache to talk. During your Udaipur trip, the messages stopped. Silence made me wonder if fate was playing a game.", bg:"my_bg.JPEG"},
-  {chapter:"Chapter 5 – Heartbreak", dialogue:"Then one day, at exactly 12:12 PM, you wrote that we shouldn’t continue. My heart shattered. You liked me, but internal battles held you back. I thought the story had ended — but love has a way of returning.", bg:"my_bg.JPEG"},
-  {chapter:"Chapter 6 – Reunion & Going with the Flow", dialogue:"A week later, your message arrived again. Relief, joy, and hope rushed through me. We decided to let things flow, laugh, cry, fight, and see where life took us. And in that freedom, love bloomed.", bg:"my_bg.JPEG"},
-  {chapter:"Chapter 7 – Falling in Love", dialogue:"Months passed. We laughed until our cheeks hurt, fought over silly things, shared secrets under moonlight, and cried when words couldn’t express our feelings. Every conversation brought us closer. Our hearts intertwined, unbreakable.", bg:"my_bg.JPEG"},
-  {chapter:"Chapter 8 – Families Meet", dialogue:"The day our families met was surreal. Formal yet warm, official yet heartfelt. The universe smiled upon us as our love was embraced and blessed. Finally, the journey felt complete — we were officially a couple.", bg:"my_bg.JPEG", photo:"family_meeting.jpg"},
-  {chapter:"Chapter 9 – First Physical Meeting", dialogue:"Meeting you for the first time, finally in person, felt like coming home. We hugged, kissed, and every moment together felt electric. Time paused. Distance vanished. Only we existed in that bubble of happiness.", bg:"my_bg.JPEG", photo:"first_meeting.jpg"},
-  {chapter:"Chapter 10 – Engagement & Marriage", dialogue:"From traveling together to getting engaged, and then marrying — every moment felt like a dream. The joy, the laughter, the love — it was the best 1.5 months of my life, stitched together in memories that would last forever.", bg:"my_bg.JPEG", photo:"engagement.jpg"},
-  {chapter:"Chapter 11 – Our First Trip Together", dialogue:"Our first trip together was to Goa. Walking hand in hand along the sunlit beaches, feeling the waves kiss our feet, we laughed, explored, and created our first shared memories away from the world. Every sunset, every breeze, every playful moment reminded me how lucky I was to have you by my side. That trip was the beginning of countless adventures together.", bg:"my_bg.JPEG", photo:"goa_trip.jpg"},
+  {chapter:"First Contact", dialogue:"I sent you a request on Shaadi.com, and you rejected it unknowingly. Two months later, I tried again, and you accepted." , bg:"my_bg.JPEG"},
+  {chapter:"The First Conversation", dialogue:"I nervously said, ‘Hey.’ You responded, ‘Hey.’ Then came the question, ‘Do we know each other?’ My heart skipped.", bg:"my_bg.JPEG"},
+  {chapter:"Confidence & Notes", dialogue:"Even before we were officially together, I wrote in my notes: 'We will get married.' It felt like certainty.", bg:"my_bg.JPEG"},
+  {chapter:"Long Distance & Udaipur Trip", dialogue:"Time zones and distance made us ache to talk. During your Udaipur trip, the messages stopped. Silence made me wonder if fate was playing a game.", bg:"my_bg.JPEG"},
+  {chapter:"Heartbreak", dialogue:"Then one day, at exactly 12:12 PM, you wrote that we shouldn’t continue. My heart shattered.", bg:"my_bg.JPEG"},
+  {chapter:"Reunion & Going with the Flow", dialogue:"A week later, your message arrived again. We decided to let things flow, laugh, cry, fight, and see where life took us.", bg:"my_bg.JPEG"},
+  {chapter:"Falling in Love", dialogue:"Months passed. We laughed until our cheeks hurt, fought over silly things, shared secrets under moonlight, and cried when words couldn’t express our feelings.", bg:"my_bg.JPEG"},
+  {chapter:"Families Meet", dialogue:"The day our families met was surreal. Formal yet warm, official yet heartfelt. Our love was embraced and blessed.", bg:"my_bg.JPEG"},
+  {chapter:"First Physical Meeting", dialogue:"Meeting you for the first time, finally in person, felt like coming home. We hugged, kissed, and every moment together felt electric.", bg:"my_bg.JPEG"},
+  {chapter:"Engagement & Marriage", dialogue:"From traveling together to getting engaged, and then marrying — every moment felt like a dream.", bg:"my_bg.JPEG"},
+  {chapter:"Our First Trip Together", dialogue:"Our first trip together was to Goa. Walking hand in hand along the sunlit beaches, feeling the waves kiss our feet, we laughed, explored, and created our first shared memories.", bg:"my_bg.JPEG"},
   {final:true}
 ];
 
 let index=0;
 const chapterEl=document.getElementById("chapter");
 const dialogueEl=document.getElementById("dialogue");
-const photoEl=document.getElementById("photo");
-const bgEl=document.getElementById("background");
 const cardEl=document.querySelector(".card");
 const buttons=document.getElementById("buttons");
 const signature=document.getElementById("signature");
+const bgEl=document.getElementById("background");
 const music=document.getElementById("bgMusic");
 
-function fadeIn(el){ el.style.opacity=1; }
-function fadeOut(el){ el.style.opacity=0; }
+function fadeIn(el){ el.style.opacity=1; el.style.transform="scale(1) translateY(0)"; }
+function fadeOut(el){ el.style.opacity=0; el.style.transform="scale(0.8) translateY(50px)"; }
 
 function showScene(scene){
   fadeOut(cardEl);
   setTimeout(()=>{
-    chapterEl.innerText = scene.chapter;
-    dialogueEl.innerText = scene.dialogue;
-    if(scene.photo){ photoEl.src = scene.photo; photoEl.style.transform="scale(1.05)"; } else { photoEl.src=""; }
+    chapterEl.innerText=scene.chapter||"";
+    dialogueEl.innerText=scene.dialogue||"";
+    // Animate heading and dialogue separately
+    chapterEl.style.opacity=0; chapterEl.style.transform="scale(0.8)";
+    dialogueEl.style.opacity=0; dialogueEl.style.transform="translateY(50px)";
+    fadeIn(chapterEl);
+    setTimeout(()=>fadeIn(dialogueEl),800);
     fadeIn(cardEl);
-    if(scene.photo) setTimeout(()=>{ photoEl.style.transform="scale(1)"; }, 7000);
   },1000);
 }
 
@@ -102,7 +102,10 @@ function runScenes(){
   if(index >= scenes.length) return;
   if(scenes[index].final){
     fadeOut(cardEl);
-    setTimeout(()=>{ buttons.style.display="block"; fadeIn(buttons); },1200);
+    setTimeout(()=>{
+      buttons.style.display="block";
+      fadeIn(buttons);
+    },1200);
     return;
   }
   showScene(scenes[index]);
@@ -110,37 +113,15 @@ function runScenes(){
   setTimeout(runScenes, 8000);
 }
 
-window.onload = function(){
+window.onload=function(){
   music.muted=false;
-  music.play().catch(()=>{ console.log("Autoplay blocked"); });
+  music.play().catch(()=>{console.log("Autoplay blocked");});
   showScene(scenes[index]);
   index++;
-  setTimeout(runScenes, 8000);
-};
-
-function yes() {
-  buttons.style.display = "none";
-  cardEl.style.display = "block";
-  fadeIn(cardEl);
-  signature.style.display = "block";
-  signature.innerText = "Thank you for choosing me — always. — From Harsh ❤️";
-  signature.style.opacity = 0;
-  signature.style.transform = "scale(0.8)";
-  setTimeout(()=>{ signature.style.opacity=1; signature.style.transform="scale(1)"; },50);
-  bgEl.style.background = "url('my_bg.JPEG') center/cover no-repeat";
-
-  for(let i=0;i<20;i++){
-    const heart=document.createElement("div"); 
-    heart.className="heart";
-    heart.style.left = Math.random()*90 + "%"; 
-    heart.style.bottom = "0px"; 
-    heart.style.animationDuration = (1+Math.random()*2) + "s";
-    document.body.appendChild(heart); 
-    setTimeout(()=>heart.remove(), 3000);
-  }
+  setTimeout(runScenes,8000);
 }
 
-const playfulMessages = [
+const playfulMessages=[
   "Oops! This was never an option 😉",
   "Try again, my heart belongs to you ❤️",
   "No? Are you kidding me? 😜",
@@ -149,22 +130,36 @@ const playfulMessages = [
   "Love doesn't accept 'No' here ❤️"
 ];
 
-function no() {
-  const message = playfulMessages[Math.floor(Math.random() * playfulMessages.length)];
-  const bubble = document.createElement("div");
-  bubble.className = "no-bubble";
-  bubble.innerText = message;
-  document.body.appendChild(bubble);
-  setTimeout(() => bubble.remove(), 2000);
-
-  for (let i = 0; i < 5; i++) {
-    const heart = document.createElement("div");
-    heart.className = "heart-bubble";
-    heart.style.left = 50 + (Math.random() * 60 - 30) + "%";
-    heart.style.bottom = 100 + Math.random() * 20 + "px";
-    heart.style.animationDuration = (1 + Math.random()) + "s";
+function yes(){
+  buttons.style.display="none";
+  fadeIn(signature);
+  signature.innerText="Thank you for choosing me — always. — From Harsh ❤️";
+  for(let i=0;i<20;i++){
+    const heart=document.createElement("div"); 
+    heart.className="heart";
+    heart.style.left=Math.random()*90 + "%";
+    heart.style.bottom="0px";
+    heart.style.animationDuration=(1+Math.random()*2) + "s";
     document.body.appendChild(heart);
-    setTimeout(() => heart.remove(), 2000);
+    setTimeout(()=>heart.remove(),3000);
+  }
+}
+
+function no(){
+  const message=playfulMessages[Math.floor(Math.random()*playfulMessages.length)];
+  const bubble=document.createElement("div");
+  bubble.className="no-bubble";
+  bubble.innerText=message;
+  document.body.appendChild(bubble);
+  setTimeout(()=>bubble.remove(),2000);
+  for(let i=0;i<5;i++){
+    const heart=document.createElement("div");
+    heart.className="heart-bubble";
+    heart.style.left=50+(Math.random()*60-30)+"%";
+    heart.style.bottom=100+Math.random()*20+"px";
+    heart.style.animationDuration=(1+Math.random())+"s";
+    document.body.appendChild(heart);
+    setTimeout(()=>heart.remove(),2000);
   }
 }
 </script>
