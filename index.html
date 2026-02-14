@@ -123,15 +123,24 @@ window.onload = function(){
 
 function yes() {
   buttons.style.display = "none";
+
+  // Show romantic background
+  bgEl.style.background = "url('bg_romantic.jpg') center/cover no-repeat";
+  bgEl.style.transform = "scale(1.05)";
+  fadeIn(bgEl);
+
+  // Show card container
+  cardEl.style.display = "block";
+  fadeIn(cardEl);
+
+  // Show Valentine signature
   signature.style.display = "block";
   signature.innerText = "Thank you for choosing me — always. — From Harsh ❤️";
   signature.style.opacity = 0;
   signature.style.transform = "scale(0.8)";
-  setTimeout(()=>{
-    signature.style.opacity = 1;
-    signature.style.transform = "scale(1)";
-  },50);
+  setTimeout(()=>{ signature.style.opacity=1; signature.style.transform="scale(1)"; },50);
 
+  // Floating hearts animation
   for(let i=0;i<20;i++){
     const heart=document.createElement("div"); 
     heart.className="heart";
@@ -154,7 +163,6 @@ const playfulMessages = [
 
 function no() {
   const message = playfulMessages[Math.floor(Math.random() * playfulMessages.length)];
-
   const bubble = document.createElement("div");
   bubble.className = "no-bubble";
   bubble.innerText = message;
