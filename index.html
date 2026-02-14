@@ -3,67 +3,78 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Our Story – Cinematic</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<title>Our Story – Cinematic & Animated</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
 <style>
 body, html {
   margin:0; padding:0;
   width:100%; height:100%;
-  font-family:'Inter',sans-serif;
-  background: url('background.jpg') center/cover no-repeat;
+  font-family:'Cormorant Garamond', serif;
+  background: url('romantic_background.jpg') center/cover no-repeat;
   display:flex; justify-content:center; align-items:center;
-  overflow:hidden;
-  position:relative;
-  color:white;
+  overflow:hidden; position:relative; color:white;
 }
 
 body::before {
   content:""; position:absolute; top:0; left:0; width:100%; height:100%;
-  background: rgba(0,0,0,0.3); z-index:0;
+  background: rgba(0,0,0,0.35); z-index:0;
 }
 
 body::after {
   content:""; position:absolute; top:0; left:0; width:100%; height:100%;
   background: url('grain.png') repeat; opacity:0.08; z-index:1;
   pointer-events:none;
-  animation:grainAnim 0.5s infinite;
 }
-@keyframes grainAnim {0%{background-position:0 0;}50%{background-position:100px 100px;}100%{background-position:0 0;}}
+
+.particles {
+  position:absolute; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:2;
+  background: url('particles.png') repeat;
+  opacity:0.05;
+  animation:moveParticles 20s linear infinite;
+}
+@keyframes moveParticles {0%{background-position:0 0;} 100%{background-position:1000px 1000px;}}
 
 .card {
-  position:relative; width:90%; max-width:800px; text-align:center; z-index:2;
+  position:relative; width:90%; max-width:800px; text-align:center; z-index:3;
 }
 
 #chapter {
-  font-size:clamp(28px,6vw,48px); font-weight:600;
-  opacity:0; transform: scale(0.8); transition: all 0.8s ease;
+  font-family:'Playfair Display', serif;
+  font-size:clamp(32px,6vw,52px); font-weight:600;
+  letter-spacing:1px; opacity:0; transform: scale(0.8); transition: all 0.8s ease;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.6);
 }
 
 #date {
   font-size:clamp(20px,4vw,32px); font-weight:500; margin-top:1vh;
-  opacity:0; transform: translateY(20px); transition: all 0.6s ease;
+  opacity:0; transform: translateY(-20px); transition: all 0.8s ease;
+  letter-spacing:0.5px;
 }
 
 #content {
-  font-size:clamp(18px,3.5vw,26px); background: rgba(255,255,255,0.85); color:#000;
+  font-size:clamp(18px,3.5vw,26px); background: rgba(255,255,255,0.9); color:#000;
   border-radius:15px; padding:12px 18px; margin-top:3vh; max-width:90%;
-  opacity:0; transform: translateY(20px); transition: all 0.6s ease;
+  opacity:0; transform: translateY(20px); transition: all 0.8s ease;
+  font-family:'Cormorant Garamond', serif;
 }
 
 #media img {
   width:100%; max-width:90%; max-height:40vh; object-fit:contain; border-radius:15px;
-  margin-top:15px; opacity:0; transform: scale(0.95); transition: all 1s ease;
+  margin-top:15px; opacity:0; transform: scale(0.95); transition: all 1.2s ease;
 }
 
 #buttons { display:none; margin-top:20px; }
-button { padding:12px 28px; border-radius:30px; border:none; font-size:clamp(16px,2vw,20px); margin:8px; cursor:pointer; }
-#yes { background:white; color:#ff5c8a; }
-#no { background:rgba(255,255,255,0.2); color:white; }
+button { padding:12px 28px; border-radius:30px; border:none; font-size:clamp(16px,2vw,20px); margin:8px; cursor:pointer; transition: transform 0.3s ease; }
+#yes { background:white; color:#ff5c8a; font-family:'Playfair Display', serif;}
+#no { background:rgba(255,255,255,0.2); color:white; font-family:'Playfair Display', serif;}
+#yes:hover,#no:hover{transform: scale(1.05);}
 
-#signature { font-size:clamp(20px,2.5vw,26px); margin-top:15px; opacity:0; transition: opacity 2s; }
+#signature { font-size:clamp(20px,2.5vw,26px); margin-top:15px; opacity:0; transition: all 2s ease; font-family:'Playfair Display', serif; transform: scale(0.8);}
 </style>
 </head>
 <body>
+<div class="particles"></div>
+
 <div class="card">
   <div id="chapter"></div>
   <div id="date"></div>
@@ -76,10 +87,7 @@ button { padding:12px 28px; border-radius:30px; border:none; font-size:clamp(16p
   <div id="signature">— From Harsh ❤️</div>
 </div>
 
-<audio id="music"></audio>
-
 <script>
-// Story data
 const scenes=[
   {chapter:"Chapter 1 – Beginning", date:"21st May 2025", content:"Hey! We started talking on Insta and WhatsApp."},
   {chapter:"Chapter 2 – Distance", date:"24th May 2025", content:"It was confusing at first, but I knew we would be together."},
@@ -90,59 +98,52 @@ const scenes=[
   {final:true}
 ];
 
-let index=0;
+let index=0, step=0;
+
 const chapterEl=document.getElementById("chapter");
 const dateEl=document.getElementById("date");
 const contentEl=document.getElementById("content");
 const mediaEl=document.getElementById("media");
 const buttons=document.getElementById("buttons");
 const signature=document.getElementById("signature");
-const music=document.getElementById("music");
 
-// Music (optional)
-const tracks={start:"music1.mp3", hope:"music2.mp3", forever:"music3.mp3"};
-
-function play(src){ if(music.src.includes(src)) return; music.src=src; music.play(); }
-
-function nextScene(){
+function nextStep(){
   if(index>=scenes.length) return;
   const s=scenes[index];
 
-  // Reset all
-  chapterEl.style.opacity=0; dateEl.style.opacity=0; contentEl.style.opacity=0; mediaEl.innerHTML="";
+  if(s.final){
+    chapterEl.style.opacity=0; dateEl.style.opacity=0; contentEl.style.opacity=0; mediaEl.innerHTML="";
+    buttons.style.display="block";
+    buttons.style.opacity=0;
+    setTimeout(()=>{buttons.style.opacity=1;},200);
+    return;
+  }
 
-  setTimeout(()=>{
-    // Chapter appears
+  if(step===0){
     chapterEl.innerText=s.chapter;
     chapterEl.style.opacity=1; chapterEl.style.transform="scale(1)";
-  },100);
-
-  // Date appears on next tap
-  chapterEl.addEventListener("click",function showDate(){
-    chapterEl.removeEventListener("click",showDate);
+    step++;
+  } else if(step===1){
     dateEl.innerText=s.date;
     dateEl.style.opacity=1; dateEl.style.transform="translateY(0)";
-    // Content appears on next tap
-    dateEl.addEventListener("click",function showContent(){
-      dateEl.removeEventListener("click",showContent);
-      contentEl.innerText=s.content;
-      contentEl.style.opacity=1; contentEl.style.transform="translateY(0)";
-      // Show image if any
-      if(s.image) mediaEl.innerHTML=`<img src="${s.image}">`; 
-      if(s.final){
-        setTimeout(()=>{buttons.style.display="block";},600);
-      }
-    });
-  });
-
-  index++;
+    step++;
+  } else if(step===2){
+    contentEl.innerText=s.content;
+    contentEl.style.opacity=1; contentEl.style.transform="translateY(0)";
+    if(s.image){
+      mediaEl.innerHTML=`<img src="${s.image}">`;
+      const img=mediaEl.querySelector('img');
+      setTimeout(()=>{img.style.opacity=1; img.style.transform="scale(1)";},50);
+    }
+    step=0;
+    index++;
+  }
 }
 
-document.querySelector(".card").addEventListener("click", nextScene);
+document.querySelector(".card").addEventListener("click", nextStep);
 
-function yes(){ buttons.style.display="none"; signature.style.opacity=1; signature.innerText="Thank you for choosing me — again. Always. — From Harsh ❤️";}
+function yes(){ buttons.style.display="none"; signature.style.opacity=1; signature.style.transform="scale(1)"; signature.innerText="Thank you for choosing me — again. Always. — From Harsh ❤️";}
 function no(){ alert("This option was never real ❤️"); }
-
 </script>
 </body>
 </html>
