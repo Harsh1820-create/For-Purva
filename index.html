@@ -4,37 +4,30 @@
 <meta charset="UTF-8">
 <title>Our Story – Animated Conversation</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-
 <style>
-body {
-  margin:0;
-  height:100vh;
-  background: url('background.jpg') center/cover no-repeat;
-  font-family:'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  display:flex;
-  justify-content:center;
-  align-items:center;
+body, html {
+  margin:0; padding:0;
+  width:100%; height:100%;
   overflow:hidden;
+  font-family:'Inter', sans-serif;
+  background: url('background.jpg') center/cover no-repeat;
   position:relative;
+  display:flex; justify-content:center; align-items:center;
   color:white;
 }
 
 body::before {
   content:"";
-  position:absolute;
-  top:0; left:0;
+  position:absolute; top:0; left:0;
   width:100%; height:100%;
   background: rgba(0,0,0,0.25);
-  pointer-events:none;
   z-index:0;
 }
 
 body::after {
   content:"";
-  position:absolute;
-  top:0; left:0;
+  position:absolute; top:0; left:0;
   width:100%; height:100%;
   pointer-events:none;
   background: url('grain.png') repeat;
@@ -42,145 +35,42 @@ body::after {
   z-index:1;
   animation:grainAnim 0.5s infinite;
 }
-
-@keyframes grainAnim {
-  0% { background-position:0 0; }
-  50% { background-position:100px 100px; }
-  100% { background-position:0 0; }
-}
+@keyframes grainAnim {0%{background-position:0 0;}50%{background-position:100px 100px;}100%{background-position:0 0;}}
 
 .card {
-  position:relative;
-  width:100%;
-  max-width:1100px;
-  height:100%;
-  padding:6vh 6vw;
-  box-sizing:border-box;
-  z-index:2;
+  position:relative; width:100%; max-width:1100px; height:100%;
+  display:flex; flex-direction:column; justify-content:flex-end; align-items:center;
+  padding:2vh 5vw; box-sizing:border-box; z-index:2;
 }
 
-#chapter {
-  position:absolute;
-  top:10px;
-  left:50%;
-  transform:translateX(-50%);
-  font-size:20px;
-  font-weight:500;
-  opacity:0;
-  transition: opacity 0.8s ease, transform 0.8s ease;
-}
+#chapter { font-size:clamp(18px,3vw,26px); font-weight:500; position:absolute; top:2vh; left:50%; transform:translateX(-50%); text-align:center; opacity:0; transition: opacity 0.8s ease, transform 0.8s ease; }
+#date { font-size:clamp(22px,4vw,32px); font-weight:500; position:absolute; top:7vh; left:50%; transform:translateX(-50%); text-align:center; opacity:0; transition: opacity 0.8s ease, transform 0.8s ease; }
 
-#date {
-  position:absolute;
-  top:40px;
-  left:50%;
-  transform:translateX(-50%);
-  font-size:28px;
-  font-weight:500;
-  opacity:0;
-  text-shadow:1px 1px 8px rgba(0,0,0,0.5);
-  transition: opacity 0.8s ease, transform 0.8s ease;
-}
+#conversation { width:100%; display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; margin-bottom:2vh; }
+.avatar { display:flex; flex-direction:column; align-items:center; width:20vw; max-width:150px; min-width:80px; }
+.avatar img { width:100%; border-radius:50%; border:2px solid white; animation: bob 2s ease-in-out infinite, blink 5s ease-in-out infinite; }
+.avatar.boy img { animation-name:bobBoy, blink; }
+.avatar.girl img { animation-name:bobGirl, blink; }
 
-#conversation {
-  position:absolute;
-  bottom:20px;
-  width:100%;
-  display:flex;
-  justify-content:space-between;
-  padding:0 50px;
-  box-sizing:border-box;
-}
+@keyframes bobBoy {0%,100%{transform:translateY(0);}50%{transform:translateY(-3px);}}
+@keyframes bobGirl {0%,100%{transform:translateY(0);}50%{transform:translateY(-3px);}}
+@keyframes blink {0%,20%,60%,100%{transform:scaleY(1);}10%,70%{transform:scaleY(0.1);}}
 
-.avatar {
-  width:150px;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-}
+.speech { background: rgba(255,255,255,0.85); color:#000; border-radius:15px; padding:8px 12px; margin-top:5px; text-align:center; opacity:0; transform: translateY(10px); transition: opacity 0.8s ease, transform 0.6s ease; word-wrap: break-word; }
+.speech.show { opacity:1; transform:translateY(0); }
 
-.avatar img {
-  width:100%;
-  border-radius:50%;
-  border:2px solid white;
-  animation: bob 2s ease-in-out infinite, blink 5s ease-in-out infinite;
-}
+#media img { width:100%; max-width:90%; max-height:40vh; object-fit:contain; border-radius:15px; margin-top:15px; opacity:0; animation:photoFade 5s ease forwards; }
+@keyframes photoFade {0%{opacity:0;}20%{opacity:1;}80%{opacity:1;}100%{opacity:0;}}
 
-.avatar.boy img { animation-name: bobBoy, blink; }
-.avatar.girl img { animation-name: bobGirl, blink; }
-
-@keyframes bobBoy { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-3px); } }
-@keyframes bobGirl { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-3px); } }
-@keyframes blink { 0%,20%,60%,100% { transform:scaleY(1); } 10%,70% { transform:scaleY(0.1); } }
-
-.speech {
-  background: rgba(255,255,255,0.85);
-  color:#000;
-  border-radius:20px;
-  padding:10px 15px;
-  max-width:250px;
-  margin-top:10px;
-  opacity:0;
-  transform: translateY(10px);
-  transition: opacity 0.8s ease, transform 0.6s ease;
-}
-
-.speech.show {
-  opacity:1;
-  transform: translateY(0);
-}
-
-#media img {
-  width:100%;
-  max-height:50vh;
-  object-fit:contain;
-  border-radius:20px;
-  margin-top:20px;
-  opacity:0;
-  animation:photoFade 5s ease forwards;
-}
-
-@keyframes photoFade {
-  0%{opacity:0;}
-  20%{opacity:1;}
-  80%{opacity:1;}
-  100%{opacity:0;}
-}
-
-#buttons {
-  display:none;
-  margin-top:40px;
-  text-align:center;
-}
-
-button {
-  padding:14px 32px;
-  border-radius:40px;
-  border:none;
-  font-size:18px;
-  margin:10px;
-  cursor:pointer;
-}
-
+#buttons { display:none; margin-top:15px; text-align:center; }
+button { padding:12px 28px; border-radius:30px; border:none; font-size:clamp(16px,2vw,20px); margin:8px; cursor:pointer; }
 #yes { background:white; color:#ff5c8a; }
 #no { background:rgba(255,255,255,0.2); color:white; }
 
-#signature {
-  margin-top:30px;
-  font-size:26px;
-  opacity:0;
-  text-align:center;
-  transition:opacity 2s;
-}
+#signature { font-size:clamp(20px,2.5vw,26px); text-align:center; margin-top:15px; opacity:0; }
 
-.zoom {
-  animation:slowZoom 8s ease forwards;
-}
-
-@keyframes slowZoom {
-  from { transform:scale(1); }
-  to { transform:scale(1.08); }
-}
+.zoom { animation:slowZoom 8s ease forwards; }
+@keyframes slowZoom {from{transform:scale(1);}to{transform:scale(1.08);}}
 </style>
 </head>
 
@@ -239,64 +129,37 @@ const textBoy=document.getElementById("speech-boy");
 const textGirl=document.getElementById("speech-girl");
 const media=document.getElementById("media");
 
-const tracks={
-  start:"music1.mp3",
-  hope:"music2.mp3",
-  forever:"music3.mp3"
-};
+const tracks={ start:"music1.mp3", hope:"music2.mp3", forever:"music3.mp3" };
 
-function play(src){
-  if(music.src.includes(src)) return;
-  music.src=src;
-  music.play();
-}
+function play(src){ if(music.src.includes(src)) return; music.src=src; music.play(); }
 
 function nextConvo(){
   if(index>=conversationScenes.length) return;
-
   const s=conversationScenes[index];
 
-  if(s.chapter) {
-    chapterEl.style.opacity=0;
-    chapterEl.innerText=s.chapter;
-    setTimeout(()=>{chapterEl.style.transition="opacity 0.8s"; chapterEl.style.opacity=1;},50);
-  }
-  if(s.date) {
-    dateEl.style.opacity=0;
-    dateEl.innerText=s.date;
-    setTimeout(()=>{dateEl.style.transition="opacity 0.8s"; dateEl.style.opacity=1;},50);
-  }
+  // Chapter & Date animation
+  if(s.chapter) { chapterEl.style.opacity=0; chapterEl.innerText=s.chapter; setTimeout(()=>{chapterEl.style.opacity=1;},100); }
+  if(s.date) { dateEl.style.opacity=0; dateEl.innerText=s.date; setTimeout(()=>{dateEl.style.opacity=1;},100); }
 
-  if(s.image){
-    media.innerHTML=`<img src="${s.image}">`;
-  }
+  // Photo
+  if(s.image) media.innerHTML=`<img src="${s.image}">`;
 
-  if(s.speaker==="boy"){
-    textBoy.innerText=s.text;
-    textBoy.classList.add("show");
-    textGirl.classList.remove("show");
-  } else if(s.speaker==="girl"){
-    textGirl.innerText=s.text;
-    textGirl.classList.add("show");
-    textBoy.classList.remove("show");
-  }
+  // Speech bubble
+  if(s.speaker==="boy"){ textBoy.innerText=s.text; textBoy.classList.add("show"); textGirl.classList.remove("show"); }
+  else if(s.speaker==="girl"){ textGirl.innerText=s.text; textGirl.classList.add("show"); textBoy.classList.remove("show"); }
 
+  // Music
   if(index===0) play(tracks.start);
   if(index===7) music.pause();
   if(index===9) play(tracks.hope);
   if(index===12) play(tracks.forever);
 
+  // Final Valentine question
   if(s.final){
     music.pause();
     setTimeout(()=>{
-      textBoy.classList.remove("show");
-      textGirl.classList.remove("show");
-      media.innerHTML="";
-      chapterEl.innerText="";
-      dateEl.innerText="";
-      const finalText=document.createElement("div");
-      finalText.style.fontSize="26px";
-      finalText.style.textAlign="center";
+      textBoy.classList.remove("show"); textGirl.classList.remove("show"); media.innerHTML=""; chapterEl.innerText=""; dateEl.innerText="";
+      const finalText=document.createElement("div"); finalText.style.fontSize="26px"; finalText.style.textAlign="center";
       finalText.innerText="Will you be my Valentine… again?";
       document.querySelector(".card").appendChild(finalText);
       document.getElementById("buttons").style.display="block";
@@ -306,20 +169,14 @@ function nextConvo(){
   index++;
 }
 
+// Tap to progress one at a time
 document.querySelector(".card").addEventListener("click", nextConvo);
 
-function yes(e){
-  e.stopPropagation();
-  document.getElementById("buttons").style.display="none";
-  const signature=document.getElementById("signature");
-  signature.style.opacity=1;
+function yes(e){ e.stopPropagation(); document.getElementById("buttons").style.display="none";
+  const signature=document.getElementById("signature"); signature.style.opacity=1;
   signature.innerText="Thank you for choosing me — again. Always. — From Harsh ❤️";
 }
-
-function no(e){
-  e.stopPropagation();
-  alert("This option was never real ❤️");
-}
+function no(e){ e.stopPropagation(); alert("This option was never real ❤️"); }
 </script>
 </body>
 </html>
