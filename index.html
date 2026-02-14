@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Our Love Story – Cinematic</title>
+<title>Harsh & Purva – Love Story</title>
 <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
 <style>
 html, body {
@@ -18,30 +18,21 @@ html, body {
   max-width:900px;
   width:90%;
   background: rgba(0,0,0,0.5);
-  padding:30px 20px;
+  padding:30px 25px;
   border-radius:25px;
   box-shadow:0 10px 30px rgba(0,0,0,0.5);
 }
-#chapter {
-  font-family:'Playfair Display', serif; 
-  font-size:clamp(36px,6vw,60px); 
-  font-weight:700; 
-  color:#ffd6e0;  
-  margin-bottom:20px; 
-  text-shadow: 2px 2px 15px rgba(0,0,0,0.7); 
-  opacity:0; transform:scale(0.8);
-  transition: all 1s ease;
-}
 #dialogue {
-  background: rgba(255,240,245,0.9);
+  background: rgba(255,240,245,0.95);
   color:#3b1f2b;
   border-radius:20px;
-  padding:16px 24px;
+  padding:22px 28px;
   font-size:clamp(18px,3.5vw,26px);
   max-width:90%; margin:0 auto;
   box-shadow:0 8px 20px rgba(0,0,0,0.3);
   opacity:0; transform:translateY(50px);
   transition: all 1s ease;
+  line-height:1.6;
 }
 #buttons { 
   display:none; 
@@ -89,7 +80,6 @@ button {
 <body>
 
 <div class="card">
-  <div id="chapter"></div>
   <div id="dialogue"></div>
   <div id="buttons">
     <button id="yes" onclick="yes()">Yes ❤️</button>
@@ -100,44 +90,37 @@ button {
 
 <script>
 const scenes = [
-  {chapter:"Chapter 1 – First Contact", dialogue:"I sent you a request on Shaadi.com, and you rejected it unknowingly. Two months later, I tried again, and you accepted. That tiny ‘accept’ changed my life forever."},
-  {chapter:"Chapter 2 – The First Conversation", dialogue:"I nervously typed, ‘Hey.’ You replied, ‘Hey.’ Just a simple greeting, but my heart was racing. Then came your question, ‘Do we know each other?’ My cheeks burned."},
-  {chapter:"Chapter 3 – Confidence & Notes", dialogue:"Even before we were officially together, I wrote in my notes: 'We will get married.' It wasn’t arrogance, just certainty. I pictured our wedding, our laughter, our shared life."},
-  {chapter:"Chapter 4 – Long Distance & Udaipur Trip", dialogue:"Time zones and distance stretched the days painfully. During your Udaipur trip, messages stopped, and I felt an ache I hadn’t known before. Every night, I whispered a silent wish that we would find our way back."},
-  {chapter:"Chapter 5 – Heartbreak", dialogue:"Then one day at exactly 12:12 PM, your message arrived: we shouldn’t continue. My heart shattered. It felt like losing a part of myself I had only just discovered."},
-  {chapter:"Chapter 6 – Reunion & Going with the Flow", dialogue:"A week later, your message arrived again. We decided to let life take its course — laugh, cry, fight, and grow together. Every moment with you felt precious."},
-  {chapter:"Chapter 7 – Falling in Love", dialogue:"Months passed. We laughed until our cheeks hurt, fought over silly things, shared secrets under moonlight, and cried when words couldn’t express our feelings. Love isn’t perfect, but it’s ours."},
-  {chapter:"Chapter 8 – Families Meet", dialogue:"The day our families met was surreal. Warm smiles, curious glances, quiet laughter — yet underneath, there was acceptance. Our love felt validated, embraced, and blessed."},
-  {chapter:"Chapter 9 – First Physical Meeting", dialogue:"Meeting you for the first time, finally in person, felt like coming home. The hug lingered, the kiss was gentle, and I felt the electric charge of connection."},
-  {chapter:"Chapter 10 – Engagement & Marriage", dialogue:"From traveling together, to getting engaged, and then marrying — every moment felt like a dream. From small breakfasts to chaotic preparations, every memory was a treasure."},
-  {chapter:"Chapter 11 – Our First Trip Together", dialogue:"Our first trip together was to Goa. Hand in hand, we walked along sunlit beaches, the waves kissing our feet. We laughed, explored, got lost in narrow lanes, and made memories that would forever be ours."},
-  {chapter:"Chapter 12 – Build-up", dialogue:"So, Purva… after all these moments we’ve shared, after all the laughter, tears, and memories…", final:false},
-  {chapter:"Chapter 13 – A Special Question", dialogue:"Will you be my Valentine?", final:true}
+  {dialogue:"Harsh first sent Purva a request on Shaadi.Com, and she rejected it unknowingly. After two months, he sent her again, and this time she accepted unknowingly. Thinking she might not respond on Shaadi.Com, he sent her a request on Instagram, which she accepted."},
+  {dialogue:"Harsh first said 'Hey'. Purva replied, 'Hey, Do we know each other?' It was 21st May 2025. She unfollowed him back. After that, they started having conversations on Instagram and WhatsApp."},
+  {dialogue:"Harsh wrote in his notes that they would get married before they were officially in a relationship. He was that sure. His mind often pictured their future together."},
+  {dialogue:"At first, their conversations were not very smooth. They had little time to talk as they were in a long-distance relationship. Then Purva went on a Udaipur trip, and their communication stopped completely."},
+  {dialogue:"One day after the trip, Purva messaged Harsh at 12:12 PM saying they should not take it further. His heart broke. She liked him but said no because she was fighting her internal battles."},
+  {dialogue:"Harsh thought it was all over. Suddenly, after a week, Purva messaged him again. He was elated. They talked and decided to go with the flow and see where it leads."},
+  {dialogue:"Then they laughed, fought, cried, and had serious conversations. Slowly, they fell in love with each other. Each day became precious."},
+  {dialogue:"Months passed. One day, their families met, and it was all official. The joy and relief were immense."},
+  {dialogue:"It was finally time for their first physical meeting after the long-distance period. They hugged, kissed, and were just so happy to be in each other’s company."},
+  {dialogue:"They traveled together, got engaged, and later married. They enjoyed the kite festival together. It was the best 1.5 months of Harsh's life, filled with laughter, love, and unforgettable memories."},
+  {dialogue:"So, Purva… after all these moments, after every laugh, tear, fight, and memory…", final:false},
+  {dialogue:"Will you be my Valentine?", final:true}
 ];
 
 let index=0;
-const chapterEl=document.getElementById("chapter");
 const dialogueEl=document.getElementById("dialogue");
 const buttons=document.getElementById("buttons");
 const signature=document.getElementById("signature");
 
 function fadeIn(el){ el.style.opacity=1; el.style.transform="scale(1) translateY(0)"; }
-function fadeOut(el){ el.style.opacity=0; el.style.transform="scale(0.8) translateY(50px)"; }
 
 function showScene(scene){
-  chapterEl.innerText = scene.chapter || "";
   dialogueEl.innerText = scene.dialogue || "";
-  chapterEl.style.opacity=0; chapterEl.style.transform="scale(0.8)";
   dialogueEl.style.opacity=0; dialogueEl.style.transform="translateY(50px)";
-  fadeIn(chapterEl);
-  setTimeout(()=>fadeIn(dialogueEl),800);
+  fadeIn(dialogueEl);
 }
 
 function runScenes(){
   if(index >= scenes.length) return;
   const scene = scenes[index];
   if(scene.final){
-    // Keep card visible
     showScene(scene);
     setTimeout(()=>{
       buttons.style.display = "block";
