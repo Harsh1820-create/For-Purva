@@ -26,7 +26,7 @@ html, body {
   font-family:'Playfair Display', serif; 
   font-size:clamp(36px,6vw,60px); 
   font-weight:700; 
-  color:#ffd6e0;  /* brighter pink */
+  color:#ffd6e0;  
   margin-bottom:20px; 
   text-shadow: 2px 2px 15px rgba(0,0,0,0.7); 
   opacity:0; transform:scale(0.8);
@@ -47,7 +47,7 @@ html, body {
   display:none; 
   margin-top:50px; 
   position: relative; 
-  z-index: 10;
+  z-index: 1000; 
 }
 button { 
   padding:12px 28px; 
@@ -57,7 +57,7 @@ button {
   margin:8px; 
   cursor:pointer; 
   transition: transform 0.3s ease;
-  z-index: 10;
+  z-index: 1000;
 }
 #yes { background:white; color:#ff5c8a; font-family:'Playfair Display', serif;}
 #no { background:rgba(255,255,255,0.2); color:white; font-family:'Playfair Display', serif;}
@@ -75,7 +75,7 @@ button {
   opacity:0; pointer-events:none;
   box-shadow:0 5px 15px rgba(0,0,0,0.3);
   animation: floatUp 2s ease forwards;
-  z-index: 15;
+  z-index: 1000;
 }
 @keyframes floatUp { 0%{transform: translateX(-50%) translateY(0); opacity:1;} 100%{transform: translateX(-50%) translateY(-150px); opacity:0;} }
 .heart-bubble {
@@ -117,7 +117,6 @@ const scenes = [
 let index=0;
 const chapterEl=document.getElementById("chapter");
 const dialogueEl=document.getElementById("dialogue");
-const cardEl=document.querySelector(".card");
 const buttons=document.getElementById("buttons");
 const signature=document.getElementById("signature");
 
@@ -125,27 +124,24 @@ function fadeIn(el){ el.style.opacity=1; el.style.transform="scale(1) translateY
 function fadeOut(el){ el.style.opacity=0; el.style.transform="scale(0.8) translateY(50px)"; }
 
 function showScene(scene){
-  fadeOut(cardEl);
-  setTimeout(()=>{
-    chapterEl.innerText=scene.chapter||"";
-    dialogueEl.innerText=scene.dialogue||"";
-    chapterEl.style.opacity=0; chapterEl.style.transform="scale(0.8)";
-    dialogueEl.style.opacity=0; dialogueEl.style.transform="translateY(50px)";
-    fadeIn(chapterEl);
-    setTimeout(()=>fadeIn(dialogueEl),800);
-    fadeIn(cardEl);
-  },500);
+  chapterEl.innerText = scene.chapter || "";
+  dialogueEl.innerText = scene.dialogue || "";
+  chapterEl.style.opacity=0; chapterEl.style.transform="scale(0.8)";
+  dialogueEl.style.opacity=0; dialogueEl.style.transform="translateY(50px)";
+  fadeIn(chapterEl);
+  setTimeout(()=>fadeIn(dialogueEl),800);
 }
 
 function runScenes(){
   if(index >= scenes.length) return;
   const scene = scenes[index];
   if(scene.final){
-    fadeOut(cardEl);
+    // Do NOT fade out card
+    showScene(scene);
     setTimeout(()=>{
       buttons.style.display = "block";
       fadeIn(buttons);
-    },800);
+    },1000);
     return;
   }
   showScene(scene);
