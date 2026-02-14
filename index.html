@@ -8,6 +8,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Dancing+Script:wght@500;700&display=swap" rel="stylesheet">
 
 <style>
+/* Global */
 html, body {
   margin: 0;
   padding: 0;
@@ -18,72 +19,75 @@ html, body {
   align-items: center;
   font-family: 'Playfair Display', serif;
   background:
-    linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+    linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
     url('my_bg.JPEG') center/cover no-repeat;
+  overflow: hidden;
 }
 
+/* Card styling */
 .card {
-  background: rgba(255,255,255,0.95);
-  max-width: 700px;
-  width: 90%;
+  background: rgba(255,255,255,0.92);
+  width: 95%;
+  max-width: 600px;
   padding: 25px 20px;
-  border-radius: 20px;
-  box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+  border-radius: 18px;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.3);
   text-align: center;
   overflow-wrap: break-word;
+  z-index: 10;
+  position: relative;
 }
 
+/* Story text */
 #dialogue {
-  font-size: clamp(16px, 2.5vw, 22px);
+  font-size: clamp(15px, 2.2vw, 20px);
   line-height: 1.6;
   color: #3b1f2b;
   min-height: 180px;
-  transition: 0.5s;
+  opacity: 0;
+  transition: opacity 1s;
+  white-space: pre-wrap;
 }
 
 .glow {
   color: #ff2f6d;
-  font-size: clamp(20px, 3.5vw, 28px);
-  text-shadow: 0 0 8px #ff9ab3, 0 0 25px #ff5c8a;
+  font-size: clamp(20px, 3vw, 26px);
+  text-shadow: 0 0 8px #ff9ab3, 0 0 20px #ff5c8a;
 }
 
+/* Buttons */
 #buttons {
   display: none;
-  margin-top: 25px;
+  margin-top: 20px;
 }
 
 button {
-  padding: 12px 26px;
+  padding: 10px 24px;
   border: none;
-  border-radius: 30px;
+  border-radius: 28px;
   font-size: clamp(14px, 2vw, 16px);
   cursor: pointer;
   margin: 8px;
   transition: all 0.3s ease;
 }
 
-#yes {
-  background: #ff5c8a;
-  color: white;
-}
+#yes { background: #ff5c8a; color: white; }
+#no { background: #ddd; position: relative; }
 
-#no {
-  background: #ddd;
-  position: relative;
-}
-
+/* Signature */
 #signature {
-  margin-top: 20px;
+  margin-top: 18px;
   font-family: 'Dancing Script', cursive;
   font-size: clamp(20px, 2.5vw, 24px);
   opacity: 0;
   transition: 2s;
 }
 
+/* Forever message */
 #forever {
   opacity: 0;
-  margin-top: 20px;
-  font-size: clamp(22px, 3vw, 26px);
+  margin-top: 18px;
+  font-size: clamp(22px, 2.8vw, 26px);
   font-weight: 700;
   line-height: 1.4;
   color: #ff2f6d;
@@ -91,34 +95,41 @@ button {
   transition: 2s;
 }
 
-.heart {
+/* Floating hearts animation */
+.heart, .bgHeart {
   position: fixed;
-  bottom: 0;
+  bottom: -20px;
   width: 18px;
   height: 18px;
   background: red;
   clip-path: polygon(50% 0%, 100% 35%, 80% 100%, 50% 80%, 20% 100%, 0 35%);
-  animation: float 4s linear forwards;
+  opacity: 0.8;
+  animation: float 8s linear infinite;
 }
+
+.bgHeart { z-index: 1; } /* Behind card */
 
 @keyframes float {
-  from { transform: translateY(0); opacity: 1; }
-  to { transform: translateY(-400px); opacity: 0; }
+  0% { transform: translateY(0) scale(1); opacity: 0.8; }
+  50% { transform: scale(1.2); }
+  100% { transform: translateY(-800px) scale(1); opacity: 0; }
 }
 
+/* Mobile adjustments */
 @media(max-width:480px){
-  .card { padding: 20px 15px; }
+  .card { padding: 18px 15px; }
   #dialogue { font-size: 16px; min-height: 160px; }
   #forever { font-size: 20px; }
   #signature { font-size: 20px; }
-  button { font-size: 14px; padding: 10px 20px; }
+  button { font-size: 14px; padding: 8px 18px; }
 }
 </style>
 </head>
 
 <body>
 
-<audio id="bgMusic" loop>
+<!-- Background Music -->
+<audio id="bgMusic" autoplay loop>
   <source src="music.mp3" type="audio/mpeg">
 </audio>
 
@@ -139,6 +150,7 @@ button {
 </div>
 
 <script>
+// Story content
 const story = [
 "Harsh first sent Purva a request on Shaadi.com, and she rejected it unknowingly. After two months, he sent her again, and this time she accepted unknowingly. Thinking she might not respond there, he sent her a request on Instagram, which she accepted.",
 "Harsh first said, ‘Hey.’ Purva replied, ‘Hey, do we know each other?’ It was 21st May 2025. She unfollowed him back. Soon, conversations began on Instagram and WhatsApp.",
@@ -163,59 +175,83 @@ const music = document.getElementById("bgMusic");
 const yesBtn = document.getElementById("yes");
 const noBtn = document.getElementById("no");
 
-// Start music on first click (mobile safe)
-document.addEventListener("click", () => {
-  if (music.paused) {
-    music.volume = 0.4;
-    music.play();
+// Start music on mobile
+document.addEventListener("click",()=>{ if(music.paused) music.play(); });
+
+// Typing with fade in/out
+function typeAndFade(line,callback){
+  box.style.opacity=0;
+  setTimeout(()=>{
+    let idx=0;
+    box.innerText='';
+    box.style.opacity=1;
+    const interval=setInterval(()=>{
+      if(idx<line.length){
+        box.innerText+=line[idx];
+        idx++;
+      } else {
+        clearInterval(interval);
+        setTimeout(callback,1200);
+      }
+    },30);
+  },500);
+}
+
+// Show story sequentially
+function showStory(){
+  if(i>=story.length) return;
+  if(i===story.length-1){
+    typeAndFade(story[i],()=>{
+      box.classList.add("glow");
+      buttons.style.display="block";
+    });
+  } else {
+    typeAndFade(story[i],()=>{
+      i++;
+      showStory();
+    });
   }
-});
-
-function showStory() {
-  box.innerText = story[i];
-  box.classList.remove("glow");
-
-  if (i === story.length - 1) {
-    box.classList.add("glow");
-    buttons.style.display = "block";
-    return;
-  }
-
-  i++;
-  setTimeout(showStory, 5000);
 }
 showStory();
 
-function yes() {
-  buttons.style.display = "none";
-  sign.style.opacity = 1;
+// Yes button
+function yes(){
+  buttons.style.display="none";
+  sign.style.opacity=1;
 
-  for (let j = 0; j < 30; j++) {
-    let h = document.createElement("div");
-    h.className = "heart";
-    h.style.left = Math.random() * 100 + "%";
+  // Floating hearts for Yes
+  for(let j=0;j<30;j++){
+    let h=document.createElement("div");
+    h.className="heart";
+    h.style.left=Math.random()*100+"%";
     document.body.appendChild(h);
-    setTimeout(() => h.remove(), 4000);
+    setTimeout(()=>h.remove(),4000);
   }
 
-  setTimeout(() => {
-    forever.style.opacity = 1;
-    music.pause();
-    music.currentTime = 0;
-  }, 1800);
+  setTimeout(()=>{ forever.style.opacity=1; },1200);
 }
 
-// Playful No button: runs + triggers Yes expansion
-noBtn.addEventListener("mouseenter", () => {
-  const x = Math.random() * 200 - 100;
-  const y = Math.random() * 120 - 60;
-  noBtn.style.transform = `translate(${x}px, ${y}px)`;
-
-  // Make Yes button expand playfully
-  yesBtn.style.transform = "scale(1.3)";
-  setTimeout(() => yesBtn.style.transform = "scale(1)", 400);
+// No button playful movement
+noBtn.addEventListener("mouseenter",()=>{
+  const x=Math.random()*200-100;
+  const y=Math.random()*120-60;
+  noBtn.style.transform=`translate(${x}px,${y}px)`;
+  yesBtn.style.transform="scale(1.3)";
+  setTimeout(()=>yesBtn.style.transform="scale(1)",400);
 });
-</script>
 
+// Background floating hearts
+function createBgHearts(){
+  const h=document.createElement("div");
+  h.className="bgHeart";
+  h.style.left=Math.random()*100+"%";
+  h.style.width=10+Math.random()*15+"px";
+  h.style.height=h.style.width;
+  h.style.animationDuration=(6+Math.random()*5)+"s";
+  document.body.appendChild(h);
+  setTimeout(()=>h.remove(),11000);
+}
+setInterval(createBgHearts,400);
+</script>
 </body>
 </html>
