@@ -39,8 +39,22 @@ html, body {
   opacity:0; transform:translateY(50px);
   transition: all 1s ease;
 }
-#buttons { display:none; margin-top:20px; }
-button { padding:12px 28px; border-radius:30px; border:none; font-size:clamp(16px,2vw,20px); margin:8px; cursor:pointer; transition: transform 0.3s ease;}
+#buttons { 
+  display:none; 
+  margin-top:50px; 
+  position: relative; 
+  z-index: 10;
+}
+button { 
+  padding:12px 28px; 
+  border-radius:30px; 
+  border:none; 
+  font-size:clamp(16px,2vw,20px); 
+  margin:8px; 
+  cursor:pointer; 
+  transition: transform 0.3s ease;
+  z-index: 10;
+}
 #yes { background:white; color:#ff5c8a; font-family:'Playfair Display', serif;}
 #no { background:rgba(255,255,255,0.2); color:white; font-family:'Playfair Display', serif;}
 #yes:hover,#no:hover{transform: scale(1.05);}
@@ -57,6 +71,7 @@ button { padding:12px 28px; border-radius:30px; border:none; font-size:clamp(16p
   opacity:0; pointer-events:none;
   box-shadow:0 5px 15px rgba(0,0,0,0.3);
   animation: floatUp 2s ease forwards;
+  z-index: 15;
 }
 @keyframes floatUp { 0%{transform: translateX(-50%) translateY(0); opacity:1;} 100%{transform: translateX(-50%) translateY(-150px); opacity:0;} }
 .heart-bubble {
@@ -78,10 +93,6 @@ button { padding:12px 28px; border-radius:30px; border:none; font-size:clamp(16p
   </div>
   <div id="signature">— From Harsh ❤️</div>
 </div>
-
-<audio id="bgMusic" loop autoplay muted>
-  <source src="bollywood_song.mp3" type="audio/mpeg">
-</audio>
 
 <script>
 const scenes = [
@@ -105,7 +116,6 @@ const dialogueEl=document.getElementById("dialogue");
 const cardEl=document.querySelector(".card");
 const buttons=document.getElementById("buttons");
 const signature=document.getElementById("signature");
-const music=document.getElementById("bgMusic");
 
 function fadeIn(el){ el.style.opacity=1; el.style.transform="scale(1) translateY(0)"; }
 function fadeOut(el){ el.style.opacity=0; el.style.transform="scale(0.8) translateY(50px)"; }
@@ -120,7 +130,7 @@ function showScene(scene){
     fadeIn(chapterEl);
     setTimeout(()=>fadeIn(dialogueEl),800);
     fadeIn(cardEl);
-  },1000);
+  },500);
 }
 
 function runScenes(){
@@ -129,22 +139,20 @@ function runScenes(){
   if(scene.final){
     fadeOut(cardEl);
     setTimeout(()=>{
-      buttons.style.display="block";
+      buttons.style.display = "block";
       fadeIn(buttons);
-    },1200);
+    },800);
     return;
   }
   showScene(scene);
   index++;
-  setTimeout(runScenes,8000);
+  setTimeout(runScenes,7000);
 }
 
 window.onload=function(){
-  music.muted=false;
-  music.play().catch(()=>{console.log("Autoplay blocked");});
   showScene(scenes[index]);
   index++;
-  setTimeout(runScenes,8000);
+  setTimeout(runScenes,7000);
 }
 
 const playfulMessages=[
