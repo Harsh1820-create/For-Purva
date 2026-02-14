@@ -3,29 +3,28 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Our Story – Cinematic & Animated</title>
+<title>Our Story – Cinematic Movie</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
 <style>
+/* BODY + BACKGROUND */
 body, html {
-  margin:0; padding:0;
-  width:100%; height:100%;
+  margin:0; padding:0; width:100%; height:100%;
   font-family:'Cormorant Garamond', serif;
   background: url('romantic_background.jpg') center/cover no-repeat;
   display:flex; justify-content:center; align-items:center;
   overflow:hidden; position:relative; color:white;
 }
 
+/* FILM GRAIN & PARTICLES */
 body::before {
   content:""; position:absolute; top:0; left:0; width:100%; height:100%;
   background: rgba(0,0,0,0.35); z-index:0;
 }
-
 body::after {
   content:""; position:absolute; top:0; left:0; width:100%; height:100%;
   background: url('grain.png') repeat; opacity:0.08; z-index:1;
   pointer-events:none;
 }
-
 .particles {
   position:absolute; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:2;
   background: url('particles.png') repeat;
@@ -34,23 +33,22 @@ body::after {
 }
 @keyframes moveParticles {0%{background-position:0 0;} 100%{background-position:1000px 1000px;}}
 
+/* CARD CONTAINER */
 .card {
   position:relative; width:90%; max-width:800px; text-align:center; z-index:3;
 }
 
+/* CHAPTER + DATE + CONTENT */
 #chapter {
-  font-family:'Playfair Display', serif;
-  font-size:clamp(32px,6vw,52px); font-weight:600;
+  font-family:'Playfair Display', serif; font-size:clamp(32px,6vw,52px); font-weight:600;
   letter-spacing:1px; opacity:0; transform: scale(0.8); transition: all 0.8s ease;
   text-shadow: 0 2px 8px rgba(0,0,0,0.6);
 }
-
 #date {
   font-size:clamp(20px,4vw,32px); font-weight:500; margin-top:1vh;
   opacity:0; transform: translateY(-20px); transition: all 0.8s ease;
   letter-spacing:0.5px;
 }
-
 #content {
   font-size:clamp(18px,3.5vw,26px); background: rgba(255,255,255,0.9); color:#000;
   border-radius:15px; padding:12px 18px; margin-top:3vh; max-width:90%;
@@ -58,17 +56,20 @@ body::after {
   font-family:'Cormorant Garamond', serif;
 }
 
+/* MEDIA IMAGES */
 #media img {
   width:100%; max-width:90%; max-height:40vh; object-fit:contain; border-radius:15px;
   margin-top:15px; opacity:0; transform: scale(0.95); transition: all 1.2s ease;
 }
 
+/* BUTTONS */
 #buttons { display:none; margin-top:20px; }
 button { padding:12px 28px; border-radius:30px; border:none; font-size:clamp(16px,2vw,20px); margin:8px; cursor:pointer; transition: transform 0.3s ease; }
 #yes { background:white; color:#ff5c8a; font-family:'Playfair Display', serif;}
 #no { background:rgba(255,255,255,0.2); color:white; font-family:'Playfair Display', serif;}
 #yes:hover,#no:hover{transform: scale(1.05);}
 
+/* SIGNATURE */
 #signature { font-size:clamp(20px,2.5vw,26px); margin-top:15px; opacity:0; transition: all 2s ease; font-family:'Playfair Display', serif; transform: scale(0.8);}
 </style>
 </head>
@@ -89,12 +90,17 @@ button { padding:12px 28px; border-radius:30px; border:none; font-size:clamp(16p
 
 <script>
 const scenes=[
-  {chapter:"Chapter 1 – Beginning", date:"21st May 2025", content:"Hey! We started talking on Insta and WhatsApp."},
-  {chapter:"Chapter 2 – Distance", date:"24th May 2025", content:"It was confusing at first, but I knew we would be together."},
-  {chapter:"Chapter 3 – Heartbreak", date:"9th June 2025", content:"She said we shouldn't continue… my heart broke 😢"},
-  {chapter:"Chapter 4 – Hope Returns", date:"15th June 2025", content:"A week later, she reached out… we decided to go with the flow ❤️"},
-  {chapter:"Chapter 5 – First Meeting", date:"2nd December 2025", content:"Finally meeting in person! So happy 😍", image:"photo2.jpg"},
-  {chapter:"Chapter 6 – Forever", date:"14th December 2025", content:"We got engaged, married, and celebrated together.", image:"photo3.jpg"},
+  {chapter:"Chapter 1 – First Contact", date:"21st May 2025", content:"I first sent you a request on Shaadi.com, you rejected it unknowingly. Two months later I sent again, and this time you accepted unknowingly. I thought you won’t respond, so I sent a request on Instagram and you accepted."},
+  {chapter:"Chapter 2 – First Conversation", date:"21st May 2025", content:"I said Hey, and you responded Hey. Then you asked, ‘Do we know each other?’ Our conversation started here."},
+  {chapter:"Chapter 3 – Confidence & Notes", date:"24th May 2025", content:"Even before being in a relationship, I wrote in my notes that we will get married. I was that sure."},
+  {chapter:"Chapter 4 – Long Distance & Trip", date:"9th June 2025", content:"Our conversations were not smooth at first. We had little time to talk, and during your Udaipur trip, our messages stopped completely."},
+  {chapter:"Chapter 5 – Heartbreak", date:"15th June 2025", content:"One day after the trip, you messaged me at 12:12 PM that we should not continue. My heart broke. You liked me but were fighting your internal battles."},
+  {chapter:"Chapter 6 – Reunion & Flow", date:"22nd June 2025", content:"A week later, you messaged me again. We laughed, cried, fought, and decided to go with the flow."},
+  {chapter:"Chapter 7 – Falling in Love", date:"15th July 2025", content:"Over months, we laughed, fought, cried, had serious conversations, and fell in love."},
+  {chapter:"Chapter 8 – Families Meet", date:"2nd December 2025", content:"Our families met and it became official. We were finally a couple officially.", image:"family_meeting.jpg"},
+  {chapter:"Chapter 9 – First Physical Meeting", date:"14th December 2025", content:"The day we met physically, we hugged, kissed, and were just so happy. Being in each other’s company felt magical.", image:"first_meeting.jpg"},
+  {chapter:"Chapter 10 – Engagement & Marriage", date:"20th December 2025", content:"We traveled together, got engaged, and also married. Best time of my life!", image:"engagement.jpg"},
+  {chapter:"Chapter 11 – Kite Festival", date:"25th December 2025", content:"We enjoyed the kite festival together, creating memories I’ll cherish forever.", image:"kite_festival.jpg"},
   {final:true}
 ];
 
