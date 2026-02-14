@@ -122,7 +122,7 @@ button {
 
   <div id="forever">
     I am always yours<br>
-    Forever and ever and ever...
+    Forever and ever and ever
   </div>
 </div>
 
@@ -139,7 +139,7 @@ const story = [
 "Months passed, our families met, and everything became official.",
 "The first time I met you in person after long distance was magical — hugs, kisses, and pure happiness.",
 "We traveled together, got engaged, married, and went to Goa — walking along beaches, sharing silences, creating memories. Those 1.5 months were some of the happiest of my life!",
-"So Babyy…",
+"So Baby…",
 "Will you be my Forever Valentine?"
 ];
 
@@ -164,9 +164,9 @@ function typeLine(line, callback){
       idx++;
     } else {
       clearInterval(interval);
-      setTimeout(callback, 1200);
+      setTimeout(callback, 800); // wait 0.8s before next line
     }
-  }, 1000); // 1 character per second
+  }, 80); // 80ms per character, normal speed
 }
 
 function showStory(){
