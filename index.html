@@ -4,15 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Our Love Story – Cinematic Auto</title>
-<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Playfair+Display:wght@400;700&family=Cormorant+Garamond:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
 <style>
 html, body { margin:0; padding:0; width:100%; height:100%; overflow:hidden; background:#000; font-family:'Dancing Script', cursive; color:white;}
-#background { position:absolute; top:0; left:0; width:100%; height:100%; background-size:cover; background-position:center; z-index:-1; transition: background 2s ease-in-out;}
-.card { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:90%; max-width:900px; text-align:center; z-index:2;}
-#chapter { font-family:'Playfair Display', serif; font-size:clamp(36px,6vw,60px); font-weight:700; color:#ffe0e6; opacity:0; text-shadow:0 2px 10px rgba(0,0,0,0.6); margin-bottom:10px; transition: all 1s ease;}
-#date { font-family:'Cormorant Garamond', serif; font-size:clamp(24px,4vw,36px); color:#ffd5dc; opacity:0; text-shadow:0 2px 6px rgba(0,0,0,0.5); margin-bottom:20px; transition: all 1s ease;}
-#dialogue { background: rgba(255, 240, 245, 0.85); color: #3b1f2b; border-radius:20px; padding:16px 24px; font-size:clamp(18px,3.5vw,26px); max-width:90%; margin:0 auto; opacity:0; box-shadow:0 8px 20px rgba(0,0,0,0.3); transition: all 1s ease; }
-#photo { margin-top:15px; opacity:0; max-width:90%; border-radius:15px; transition: all 2s ease;}
+#background { position:absolute; top:0; left:0; width:100%; height:100%; background-size:cover; background-position:center; z-index:-1; transition: all 2s ease-in-out; transform:scale(1); opacity:0; }
+.card { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:90%; max-width:900px; text-align:center; z-index:2; opacity:0; transition: opacity 1s ease;}
+#chapter { font-family:'Playfair Display', serif; font-size:clamp(36px,6vw,60px); font-weight:700; color:#ffe0e6; margin-bottom:20px; text-shadow:0 2px 10px rgba(0,0,0,0.6); }
+#dialogue { background: rgba(255, 240, 245, 0.85); color: #3b1f2b; border-radius:20px; padding:16px 24px; font-size:clamp(18px,3.5vw,26px); max-width:90%; margin:0 auto; box-shadow:0 8px 20px rgba(0,0,0,0.3); }
+#photo { margin-top:15px; max-width:90%; border-radius:15px; transition: transform 7s ease; }
 #buttons { display:none; margin-top:20px;}
 button { padding:12px 28px; border-radius:30px; border:none; font-size:clamp(16px,2vw,20px); margin:8px; cursor:pointer; transition: transform 0.3s ease;}
 #yes { background:white; color:#ff5c8a; font-family:'Playfair Display', serif;}
@@ -28,7 +27,6 @@ button { padding:12px 28px; border-radius:30px; border:none; font-size:clamp(16p
 <div id="background"></div>
 <div class="card">
   <div id="chapter"></div>
-  <div id="date"></div>
   <div id="dialogue"></div>
   <img id="photo" src="">
   <div id="buttons">
@@ -44,58 +42,63 @@ button { padding:12px 28px; border-radius:30px; border:none; font-size:clamp(16p
 
 <script>
 const scenes=[
-  {chapter:"Chapter 1 – First Contact", date:"21st May 2025", dialogue:"I first sent you a request on Shaadi.com, you rejected it unknowingly. Two months later I sent again, and this time you accepted unknowingly. I thought you won’t respond, so I sent a request on Instagram and you accepted.", bg:"bg1.jpg"},
-  {chapter:"Chapter 2 – First Conversation", date:"21st May 2025", dialogue:"I said Hey, and you responded Hey. Then you asked, ‘Do we know each other?’ Our conversation started here.", bg:"bg2.jpg"},
-  {chapter:"Chapter 3 – Confidence & Notes", date:"24th May 2025", dialogue:"Even before being in a relationship, I wrote in my notes that we will get married. I was that sure.", bg:"bg3.jpg"},
-  {chapter:"Chapter 4 – Long Distance & Trip", date:"9th June 2025", dialogue:"Our conversations were not smooth at first. We had little time to talk, and during your Udaipur trip, our messages stopped completely.", bg:"bg4.jpg"},
-  {chapter:"Chapter 5 – Heartbreak", date:"15th June 2025", dialogue:"One day after the trip, you messaged me at 12:12 PM that we should not continue. My heart broke. You liked me but were fighting your internal battles.", bg:"bg5.jpg"},
-  {chapter:"Chapter 6 – Reunion & Flow", date:"22nd June 2025", dialogue:"A week later, you messaged me again. We laughed, cried, fought, and decided to go with the flow.", bg:"bg6.jpg"},
-  {chapter:"Chapter 7 – Falling in Love", date:"15th July 2025", dialogue:"Over months, we laughed, fought, cried, had serious conversations, and fell in love.", bg:"bg7.jpg"},
-  {chapter:"Chapter 8 – Families Meet", date:"2nd December 2025", dialogue:"Our families met and it became official. We were finally a couple officially.", bg:"bg8.jpg", photo:"family_meeting.jpg"},
-  {chapter:"Chapter 9 – First Physical Meeting", date:"14th December 2025", dialogue:"The day we met physically, we hugged, kissed, and were just so happy. Being in each other’s company felt magical.", bg:"bg9.jpg", photo:"first_meeting.jpg"},
-  {chapter:"Chapter 10 – Engagement & Marriage", date:"20th December 2025", dialogue:"We traveled together, got engaged, and also married. Best time of my life!", bg:"bg10.jpg", photo:"engagement.jpg"},
-  {chapter:"Chapter 11 – Kite Festival", date:"25th December 2025", dialogue:"We enjoyed the kite festival together, creating memories I’ll cherish forever.", bg:"bg11.jpg", photo:"kite_festival.jpg"},
+  {chapter:"Chapter 1 – First Contact", dialogue:"I first sent you a request on Shaadi.com, you rejected it unknowingly. Two months later I sent again, and this time you accepted unknowingly. I thought you won’t respond, so I sent a request on Instagram and you accepted.", bg:"bg1.jpg"},
+  {chapter:"Chapter 2 – First Conversation", dialogue:"I said Hey, and you responded Hey. Then you asked, ‘Do we know each other?’ Our conversation started here.", bg:"bg2.jpg"},
+  {chapter:"Chapter 3 – Confidence & Notes", dialogue:"Even before being in a relationship, I wrote in my notes that we will get married. I was that sure.", bg:"bg3.jpg"},
+  {chapter:"Chapter 4 – Long Distance & Trip", dialogue:"Our conversations were not smooth at first. We had little time to talk, and during your Udaipur trip, our messages stopped completely.", bg:"bg4.jpg"},
+  {chapter:"Chapter 5 – Heartbreak", dialogue:"One day after the trip, you messaged me at 12:12 PM that we should not continue. My heart broke. You liked me but were fighting your internal battles.", bg:"bg5.jpg"},
+  {chapter:"Chapter 6 – Reunion & Flow", dialogue:"A week later, you messaged me again. We laughed, cried, fought, and decided to go with the flow.", bg:"bg6.jpg"},
+  {chapter:"Chapter 7 – Falling in Love", dialogue:"Over months, we laughed, fought, cried, had serious conversations, and fell in love.", bg:"bg7.jpg"},
+  {chapter:"Chapter 8 – Families Meet", dialogue:"Our families met and it became official. We were finally a couple officially.", bg:"bg8.jpg", photo:"family_meeting.jpg"},
+  {chapter:"Chapter 9 – First Physical Meeting", dialogue:"The day we met physically, we hugged, kissed, and were just so happy. Being in each other’s company felt magical.", bg:"bg9.jpg", photo:"first_meeting.jpg"},
+  {chapter:"Chapter 10 – Engagement & Marriage", dialogue:"We traveled together, got engaged, and also married. Best time of my life!", bg:"bg10.jpg", photo:"engagement.jpg"},
+  {chapter:"Chapter 11 – Kite Festival", dialogue:"We enjoyed the kite festival together, creating memories I’ll cherish forever.", bg:"bg11.jpg", photo:"kite_festival.jpg"},
   {final:true}
 ];
 
 let index=0;
 const chapterEl=document.getElementById("chapter");
-const dateEl=document.getElementById("date");
 const dialogueEl=document.getElementById("dialogue");
 const photoEl=document.getElementById("photo");
 const bgEl=document.getElementById("background");
+const cardEl=document.querySelector(".card");
 const buttons=document.getElementById("buttons");
 const signature=document.getElementById("signature");
 const music=document.getElementById("bgMusic");
 
+function fadeIn(el){ el.style.opacity=1; }
+function fadeOut(el){ el.style.opacity=0; }
+
 function showScene(scene){
-  chapterEl.style.opacity=0; dateEl.style.opacity=0; dialogueEl.style.opacity=0; photoEl.style.opacity=0;
-  if(scene.bg) bgEl.style.background=`url(${scene.bg}) center/cover no-repeat`;
-  setTimeout(()=>{ chapterEl.innerText=scene.chapter; chapterEl.style.opacity=1; },200);
-  setTimeout(()=>{ dateEl.innerText=scene.date; dateEl.style.opacity=1; },1000);
+  fadeOut(cardEl);
+  fadeOut(bgEl);
   setTimeout(()=>{
-    dialogueEl.innerText=scene.dialogue; dialogueEl.style.opacity=1;
-    if(scene.photo){ photoEl.src=scene.photo; photoEl.style.opacity=1; }
-  },1800);
+    if(scene.bg) { bgEl.style.background=`url(${scene.bg}) center/cover no-repeat`; bgEl.style.transform="scale(1.05)"; }
+    chapterEl.innerText = scene.chapter;
+    dialogueEl.innerText = scene.dialogue;
+    if(scene.photo){ photoEl.src = scene.photo; photoEl.style.transform="scale(1.05)"; } else { photoEl.src=""; }
+    fadeIn(bgEl);
+    fadeIn(cardEl);
+    // Reset photo zoom
+    if(scene.photo) setTimeout(()=>{ photoEl.style.transform="scale(1)"; }, 7000);
+  },1000);
 }
 
 function runScenes(){
   if(index >= scenes.length) return;
   if(scenes[index].final){
-    chapterEl.style.opacity=0; dateEl.style.opacity=0; dialogueEl.style.opacity=0; photoEl.style.opacity=0;
-    setTimeout(()=>{ buttons.style.display="block"; buttons.style.opacity=1; },1000);
+    fadeOut(cardEl); fadeOut(bgEl);
+    setTimeout(()=>{ buttons.style.display="block"; fadeIn(buttons); },1200);
     return;
   }
   showScene(scenes[index]);
   index++;
-  // Adjust time per scene for cinematic pacing (e.g., 7s)
-  setTimeout(runScenes, 7000);
+  setTimeout(runScenes, 8000); // cinematic timing
 }
 
-// Start automatically
 window.onload = function(){
-  music.muted = false; // attempt autoplay
-  music.play().catch(()=>{ console.log("Autoplay blocked, tap to start music"); });
+  music.muted=false;
+  music.play().catch(()=>{ console.log("Autoplay blocked"); });
   runScenes();
 };
 
@@ -110,7 +113,6 @@ function yes(){
 }
 
 function no(){ alert("This option was never real ❤️"); }
-
 </script>
 </body>
 </html>
