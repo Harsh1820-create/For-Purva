@@ -1,289 +1,242 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>For Purva ❤️</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<title>Almost Missed → Forever</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- Handwritten font -->
-  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;600&display=swap" rel="stylesheet">
 
-  <style>
-    body {
-      background:
-        radial-gradient(circle at top, rgba(255,182,193,0.35), transparent 60%),
-        linear-gradient(to bottom right, #7b2c3f, #b23a48, #ff758f);
-      font-family: 'Dancing Script', 'Georgia', serif;
-      color: #fff;
-      height: 100vh;
-      margin: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-    }
+<style>
+:root {
+  --text-size: clamp(20px, 2.4vw, 26px);
+}
 
-    .card {
-      background: rgba(0,0,0,0.28);
-      padding: 40px 30px;
-      border-radius: 25px;
-      max-width: 520px;
-      width: 92%;
-      box-shadow:
-        0 20px 40px rgba(0,0,0,0.35),
-        0 0 45px rgba(255, 120, 150, 0.35);
-      backdrop-filter: blur(8px);
-    }
+body {
+  margin:0;
+  height:100vh;
+  background: radial-gradient(circle at top, #ff9aa2, #7b2c3f 60%);
+  font-family:'Dancing Script', serif;
+  color:white;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  overflow:hidden;
+}
 
-    #content {
-      font-size: 22px;
-      line-height: 1.7;
-      min-height: 120px;
-      letter-spacing: 0.5px;
-    }
+.card {
+  width:100%;
+  height:100%;
+  max-width:1100px;
+  padding:6vh 6vw;
+  box-sizing:border-box;
+  position:relative;
+}
 
-    #content::after {
-      content: " |";
-      animation: blink 1s infinite;
-    }
+#date {
+  position:absolute;
+  top:20px;
+  right:30px;
+  font-size:14px;
+  opacity:0.7;
+}
 
-    @keyframes blink {
-      0%,50% {opacity:1;}
-      51%,100% {opacity:0;}
-    }
+#text {
+  font-size:var(--text-size);
+  line-height:1.8;
+  max-width:900px;
+  animation:fadeIn 1s ease;
+}
 
-    img {
-      width: 100%;
-      border-radius: 18px;
-      margin-top: 18px;
-      opacity: 0;
-      animation: photoFade 4s ease forwards;
-    }
+#text::after {
+  content:" |";
+  animation:blink 1s infinite;
+}
 
-    @keyframes photoFade {
-      0% { opacity:0; }
-      20% { opacity:1; }
-      80% { opacity:1; }
-      100% { opacity:0; }
-    }
+@keyframes blink {
+  0%,50%{opacity:1;}
+  51%,100%{opacity:0;}
+}
 
-    .buttons {
-      margin-top: 25px;
-      display: none;
-    }
+img {
+  width:100%;
+  max-height:60vh;
+  object-fit:contain;
+  margin-top:30px;
+  border-radius:20px;
+  opacity:0;
+  animation:photoFade 5s ease forwards;
+}
 
-    button {
-      background: #fff;
-      color: #ff5c8a;
-      border: none;
-      padding: 12px 26px;
-      font-size: 17px;
-      border-radius: 30px;
-      cursor: pointer;
-      margin: 8px;
-    }
+@keyframes photoFade {
+  0%{opacity:0;}
+  20%{opacity:1;}
+  80%{opacity:1;}
+  100%{opacity:0;}
+}
 
-    #playfulMsg {
-      margin-top: 20px;
-      font-size: 17px;
-      color: #ffe6ec;
-      display: none;
-    }
+#buttons {
+  display:none;
+  margin-top:40px;
+}
 
-    #keepsake button {
-      font-size: 18px;
-      padding: 12px 28px;
-    }
+button {
+  padding:14px 32px;
+  border-radius:40px;
+  border:none;
+  font-size:18px;
+  margin:10px;
+  cursor:pointer;
+}
 
-    #signature {
-      display: none;
-      margin-top: 25px;
-      font-size: 24px;
-      color: #ffd1dc;
-      opacity: 0;
-      transition: opacity 2s;
-    }
+#yes { background:white; color:#ff5c8a; }
+#no { background:rgba(255,255,255,0.2); color:white; }
 
-    .heart {
-      position: fixed;
-      font-size: 22px;
-      animation: floatUp 2s ease forwards;
-      pointer-events: none;
-    }
+#signature {
+  margin-top:30px;
+  font-size:26px;
+  opacity:0;
+  transition:opacity 2s;
+}
 
-    @keyframes floatUp {
-      from { opacity: 1; transform: translateY(0) scale(1); }
-      to { opacity: 0; transform: translateY(-90px) scale(1.4); }
-    }
-  </style>
+.zoom {
+  animation:slowZoom 8s ease forwards;
+}
+
+@keyframes slowZoom {
+  from { transform:scale(1); }
+  to { transform:scale(1.08); }
+}
+
+@keyframes fadeIn {
+  from{opacity:0;}
+  to{opacity:1;}
+}
+</style>
 </head>
 
 <body>
+<div class="card" onclick="next()">
+  <div id="date"></div>
+  <div id="text"></div>
+  <div id="media"></div>
 
-  <!-- Music -->
-  <audio id="bgMusic" loop>
-    <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3" type="audio/mpeg">
-  </audio>
-
-  <div class="card" onclick="nextStep()">
-    <div id="content">💌 Harsh sent you something…</div>
-    <div id="image"></div>
-
-    <div class="buttons" id="buttons">
-      <button onclick="yes(event)">Yes ❤️</button>
-      <button onclick="no(event)">No 🙈</button>
-    </div>
-
-    <div id="playfulMsg"></div>
-
-    <div id="keepsake" style="display:none; margin-top:20px;">
-      <button onclick="replay()">Replay this moment 💌</button>
-    </div>
-
-    <div id="signature">— From Harsh ❤️</div>
-
-    <div class="hint">(tap anywhere)</div>
+  <div id="buttons">
+    <button id="yes" onclick="yes(event)">Yes ❤️</button>
+    <button id="no" onclick="no(event)">No 🙈</button>
   </div>
 
-  <!-- Floating hearts -->
-  <script>
-    for(let i=0;i<12;i++){
-      const heartEl=document.createElement("div");
-      heartEl.className="heart";
-      heartEl.innerText="💖";
-      heartEl.style.left=Math.random()*100+"vw";
-      heartEl.style.bottom="20px";
-      document.body.appendChild(heartEl);
-      setTimeout(()=>heartEl.remove(),2000);
+  <div id="signature">— From Harsh ❤️</div>
+</div>
+
+<audio id="music"></audio>
+
+<script>
+const scenes = [
+  { text:"This story almost never happened…" },
+
+  { text:"I sent you a request on Shaadi.com. You rejected it… unknowingly." },
+  { text:"Two months later… you accepted it. Unknowingly again." },
+
+  { date:"24th May 2025", text:"I wrote something in my notes — long before we were together.", note:"We will get married." },
+
+  { text:"We talked from far away. Time was limited. Distance was loud.", image:"photo1.jpg" },
+
+  { date:"9th June 2025", text:"At 12:12 PM… you said we should not take it further." },
+
+  { date:"15th June 2025", text:"A week later… you messaged again. Just one word. Hey." },
+
+  { text:"We decided to go with the flow. And somewhere between laughs, fights and tears… we fell in love." },
+
+  { date:"2nd December 2025", text:"Distance finally ended.", image:"photo2.jpg" },
+
+  { date:"14th December 2025", text:"We travelled. We got engaged. We got married. We lived.", image:"photo3.jpg" },
+  { image:"photo4.jpg" },
+
+  { final:true }
+];
+
+let index=0, typing=false;
+const textEl=document.getElementById("text");
+const media=document.getElementById("media");
+const dateEl=document.getElementById("date");
+const music=document.getElementById("music");
+
+const tracks={
+  start:"music1.mp3",
+  hope:"music2.mp3",
+  forever:"music3.mp3"
+};
+
+function play(src){
+  if(music.src.includes(src)) return;
+  music.src=src;
+  music.play();
+}
+
+function type(txt, cb){
+  typing=true;
+  textEl.innerText="";
+  let words=txt.split(" "), i=0;
+  let t=setInterval(()=>{
+    textEl.innerText+=words[i]+" ";
+    i++;
+    if(i>=words.length){
+      clearInterval(t);
+      typing=false;
+      if(cb)cb();
     }
-  </script>
+  },160);
+}
 
-  <script>
-    // Steps of the letter
-    const steps = [
-      { text: "💌 Harsh sent you something…" },
-      { text: "Purva ❤️" },
-      { text: "In a world that never slows down," },
-      { text: "you became my pause." },
-      { image: "photo1.jpg" },
-      { text: "When life feels heavy," },
-      { text: "your presence makes it lighter." },
-      { image: "photo2.jpg" },
-      { text: "Loving you doesn’t feel like effort." },
-      { text: "It feels like home." },
-      { image: "photo3.jpg" },
-      { text: "So today, with a full heart…" },
-      { text: "Will you be my Valentine? 💞", buttons:true }
-    ];
+function next(){
+  if(typing || index>=scenes.length) return;
 
-    let stepIndex=0;
-    let isTyping=false;
+  const s=scenes[index];
+  media.innerHTML="";
+  dateEl.innerText=s.date||"";
 
-    const content=document.getElementById("content");
-    const imageBox=document.getElementById("image");
-    const buttons=document.getElementById("buttons");
-    const playfulMsg=document.getElementById("playfulMsg");
+  if(index===0) play(tracks.start);
+  if(index===5) music.pause();
+  if(index===6) play(tracks.hope);
+  if(index===8) play(tracks.forever);
 
-    const music=document.getElementById("bgMusic");
+  if(s.note){
+    type(s.text, ()=> type(s.note));
+  } else if(s.text){
+    type(s.text);
+  }
 
-    function typeText(text, callback){
-      isTyping=true;
-      content.innerText="";
-      const words=text.split(" ");
-      let i=0;
-      const interval=setInterval(()=>{
-        content.innerText+=words[i]+" ";
-        i++;
-        if(i>=words.length){
-          clearInterval(interval);
-          isTyping=false;
-          if(callback) callback();
-        }
-      },180);
-    }
+  if(s.image){
+    media.innerHTML=`<img src="${s.image}">`;
+  }
 
-    function nextStep(){
-      if(isTyping || stepIndex>=steps.length) return;
-
-      if(music.paused) music.play();
-
-      imageBox.innerHTML="";
-      playfulMsg.style.display="none";
-
-      const step=steps[stepIndex];
-
-      if(step.text) typeText(step.text);
-      if(step.image) imageBox.innerHTML=`<img src="${step.image}">`;
-      if(step.buttons) buttons.style.display="block";
-
-      stepIndex++;
-    }
-
-    function yes(e){
-      e.stopPropagation();
-
-      // Heart burst
-      for(let i=0;i<14;i++){
-        const heart=document.createElement("div");
-        heart.className="heart";
-        heart.innerText="💖";
-        heart.style.left=Math.random()*100+"vw";
-        heart.style.bottom="20px";
-        document.body.appendChild(heart);
-        setTimeout(()=>heart.remove(),2000);
-      }
-
-      buttons.style.display="none";
-      imageBox.innerHTML="";
-      localStorage.setItem("valentineAccepted","yes");
-      document.getElementById("keepsake").style.display="block";
-
-      typeText(
-        "Thank you for choosing me, Purva. I promise to stand by you on easy days and hard ones. Today and every tomorrow. With all my love, Harsh ❤️"
-      );
-
-      // Signature fade-in
+  if(s.final){
+    music.pause();
+    textEl.classList.add("zoom");
+    type("After every almost… every pause… and every leap of faith…", ()=>{
       setTimeout(()=>{
-        const sig=document.getElementById("signature");
-        sig.style.display="block";
-        setTimeout(()=>sig.style.opacity=1,100);
-      },1800);
-    }
+        type("Will you be my Valentine… again?");
+        document.getElementById("buttons").style.display="block";
+      },800);
+    });
+  }
 
-    function no(e){
-      e.stopPropagation();
-      const messages=[
-        "Hmm… this option seems unavailable 😌",
-        "Nice try 😄 but my heart already knows",
-        "System message: Purva is already selected ❤️",
-        "No worries… take another look 💕",
-        "That button is just for decoration 🙈"
-      ];
-      playfulMsg.innerText=messages[Math.floor(Math.random()*messages.length)];
-      playfulMsg.style.display="block";
-    }
+  index++;
+}
 
-    function replay(){
-      stepIndex=0;
-      buttons.style.display="none";
-      document.getElementById("keepsake").style.display="none";
-      document.getElementById("signature").style.opacity=0;
-      document.getElementById("signature").style.display="none";
-      nextStep();
-    }
+function yes(e){
+  e.stopPropagation();
+  document.getElementById("buttons").style.display="none";
+  type("Thank you for choosing me — again. Always.", ()=>{
+    document.getElementById("signature").style.opacity=1;
+  });
+}
 
-    // Keepsake on revisit
-    window.onload=()=>{
-      if(localStorage.getItem("valentineAccepted")==="yes"){
-        stepIndex=steps.length-1;
-        buttons.style.display="none";
-        document.getElementById("keepsake").style.display="block";
-        typeText("💌 This moment was saved. Tap replay whenever you want, Purva ❤️");
-        document.getElementById("signature").style.display="block";
-        document.getElementById("signature").style.opacity=1;
-      }
-    }
-  </script>
-
+function no(e){
+  e.stopPropagation();
+  alert("This option was never real ❤️");
+}
+</script>
 </body>
 </html>
