@@ -24,12 +24,12 @@ html, body {
 
 .card {
   background: rgba(255,255,255,0.95);
-  width: 70%;
-  max-width: 350px;
-  min-height: 320px;
-  padding: 15px 12px;
+  width: 65%;
+  max-width: 320px;
+  min-height: 280px;
+  padding: 12px 10px;
   border-radius: 18px;
-  box-shadow: 0 0 30px rgba(255,105,150,0.3), 0 10px 20px rgba(0,0,0,0.2);
+  box-shadow: 0 0 25px rgba(255,105,150,0.3), 0 8px 15px rgba(0,0,0,0.2);
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -39,15 +39,15 @@ html, body {
 }
 
 @keyframes pulseGlow {
-  0%, 100% { box-shadow: 0 0 30px rgba(255,105,150,0.3), 0 10px 20px rgba(0,0,0,0.2); }
-  50% { box-shadow: 0 0 50px rgba(255,105,150,0.5), 0 10px 20px rgba(0,0,0,0.25); }
+  0%, 100% { box-shadow: 0 0 25px rgba(255,105,150,0.3), 0 8px 15px rgba(0,0,0,0.2); }
+  50% { box-shadow: 0 0 45px rgba(255,105,150,0.5), 0 8px 15px rgba(0,0,0,0.25); }
 }
 
 #dialogue {
-  font-size: clamp(13px, 1.8vw, 16px);
+  font-size: clamp(12px, 1.6vw, 15px);
   line-height: 1.5;
   color: #3b1f2b;
-  min-height: 120px;
+  min-height: 100px;
   opacity: 0;
   transition: opacity 1s;
   white-space: pre-wrap;
@@ -58,22 +58,22 @@ html, body {
 .glow {
   color: #ff2f6d;
   font-weight: 700;
-  font-size: clamp(16px, 2vw, 18px);
+  font-size: clamp(15px, 1.9vw, 17px);
 }
 
 #buttons {
   display: none;
-  margin-top: 12px;
+  margin-top: 10px;
   text-align: center;
 }
 
 button {
-  padding: 6px 16px;
+  padding: 5px 14px;
   border: none;
   border-radius: 25px;
-  font-size: clamp(12px, 1.6vw, 14px);
+  font-size: clamp(11px, 1.5vw, 13px);
   cursor: pointer;
-  margin: 4px;
+  margin: 3px;
   transition: all 0.3s ease;
 }
 
@@ -81,9 +81,9 @@ button {
 #no { background: #ddd; position: relative; }
 
 #signature {
-  margin-top: 10px;
+  margin-top: 8px;
   font-family: 'Dancing Script', cursive;
-  font-size: clamp(16px, 1.9vw, 18px);
+  font-size: clamp(15px, 1.8vw, 17px);
   opacity: 0;
   transition: 2s;
   text-align: center;
@@ -91,8 +91,8 @@ button {
 
 #forever {
   opacity: 0;
-  margin-top: 10px;
-  font-size: clamp(17px, 2vw, 20px);
+  margin-top: 8px;
+  font-size: clamp(16px, 1.9vw, 18px);
   font-weight: 700;
   line-height: 1.4;
   color: #ff2f6d;
@@ -101,11 +101,11 @@ button {
 }
 
 @media(max-width:480px){
-  .card { padding: 12px 8px; width: 85%; min-height: 280px; }
-  #dialogue { font-size: 13px; min-height: 100px; }
-  #forever { font-size: 16px; }
-  #signature { font-size: 15px; }
-  button { font-size: 12px; padding: 5px 12px; }
+  .card { width: 85%; min-height: 250px; padding: 10px 8px; }
+  #dialogue { font-size: 12px; min-height: 90px; }
+  #forever { font-size: 15px; }
+  #signature { font-size: 14px; }
+  button { font-size: 11px; padding: 4px 10px; }
 }
 </style>
 </head>
@@ -133,7 +133,6 @@ button {
 </div>
 
 <script>
-// Story narrated by you to your wife
 const story = [
 "Hey Purva… I want to tell you our story…",
 "I first sent you a request on Shaadi.com, and you rejected it unknowingly. After two months, I sent it again, and you accepted. Thinking you might not respond there, I sent a request on Instagram, and you accepted that too!",
@@ -146,8 +145,8 @@ const story = [
 "Months passed, our families met, and everything became official.",
 "The first time I met you in person after long distance was magical — hugs, kisses, and pure happiness.",
 "We traveled together, got engaged, married, and went to Goa — walking along beaches, sharing silences, creating memories. Those 1.5 months were some of the happiest of my life!",
-"So Babyy…",
-"Will you be my Forever Valentine?"
+"So Baby…",
+"Will you be my Forevet Valentine?"
 ];
 
 let i = 0;
@@ -199,12 +198,12 @@ function yes(){
 }
 
 noBtn.addEventListener("mouseenter", ()=>{
-  const x = Math.random()*120 - 60;
-  const y = Math.random()*80 - 40;
+  const x = Math.random()*100 - 50;
+  const y = Math.random()*60 - 30;
   noBtn.style.transform = `translate(${x}px, ${y}px)`;
 
-  yesBtn.style.transform = "scale(1.6)";
-  yesBtn.style.boxShadow = "0 0 20px #ff5c8a, 0 0 40px #ff9ab3";
+  yesBtn.style.transform = "scale(1.5)";
+  yesBtn.style.boxShadow = "0 0 18px #ff5c8a, 0 0 35px #ff9ab3";
   yesBtn.style.transition = "transform 0.3s ease, box-shadow 0.3s ease";
 
   setTimeout(()=>{
